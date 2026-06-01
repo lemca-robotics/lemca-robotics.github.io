@@ -7,13 +7,13 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: Overview
+  favicon: favicon.ico
+
 
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, distill.scss]
     css: styles.css
     toc: true
-
-
 

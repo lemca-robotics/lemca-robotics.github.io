@@ -1,0 +1,245 @@
+/*-- scss:defaults --*/
+
+// =============================================================================
+// Distill theme for Quarto
+// -----------------------------------------------------------------------------
+// Mirrors the typography, color, and spacing of the Distill template
+// (https://distill.pub) while driving everything through Quarto/Bootstrap
+// variables so the site stays fully Bootstrap-compatible. Distill-specific
+// flourishes that no Bootstrap variable can express (the underlined h2, the
+// body-link border, the table rules) live in the scss:rules layer below.
+// =============================================================================
+
+// ── Fonts ────────────────────────────────────────────────────────────────────
+// Distill ships with the native system sans-serif stack (its source lists
+// "Libre Franklin" as an optional hosted font). To use a web font instead,
+// uncomment an @import and prepend the family below.
+//
+// @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+$font-family-sans-serif:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-monospace:   "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+// The Cosmo base layer imports Source Sans Pro from Google Fonts. Since the
+// Distill system stack above overrides it, suppress that download so the page
+// doesn't fetch a font it never renders. (Set a URL here to re-enable.)
+$web-font-path: false !default;
+
+// ── Base sizing & vertical rhythm ─────────────────────────────────────────────
+$font-size-root:   16px      !default;
+$font-size-base:   1.0625rem !default;  // ~17px — Distill's comfortable reading size
+$line-height-base: 1.7       !default;  // Distill article line-height
+
+// ── Color palette ─────────────────────────────────────────────────────────────
+$body-color:       rgba(0, 0, 0, 0.8) !default;  // Distill body text
+$body-bg:          #ffffff           !default;
+$link-color:       #004276           !default;   // Distill base link navy
+$link-hover-color: #002b4d           !default;
+$link-decoration:  none              !default;
+
+// Distill accent (the teal used by the "status" kicker and small accents)
+$distill-accent:   #009688 !default;
+
+// Muted ink levels reused throughout the rules layer
+$ink-1:   rgba(0, 0, 0, 0.8) !default;
+$ink-2:   rgba(0, 0, 0, 0.6) !default;
+$ink-3:   rgba(0, 0, 0, 0.5) !default;
+$rule-strong: rgba(0, 0, 0, 0.2)  !default;
+$rule-soft:   rgba(0, 0, 0, 0.1)  !default;
+$rule-faint:  rgba(0, 0, 0, 0.05) !default;
+
+// ── Headings ──────────────────────────────────────────────────────────────────
+$headings-color:       $ink-1 !default;
+$headings-font-weight: 600    !default;
+$headings-line-height: 1.25   !default;
+
+$h1-font-size: 3.125rem  !default;  // 50px — document title
+$h2-font-size: 2.25rem   !default;  // 36px
+$h3-font-size: 1.25rem   !default;  // 20px
+$h4-font-size: 0.875rem  !default;  // 14px (rendered uppercase)
+$h5-font-size: 1rem      !default;
+$h6-font-size: 0.85rem   !default;
+
+// ── Tables ────────────────────────────────────────────────────────────────────
+$table-border-color:   $rule-faint !default;
+$table-cell-padding-y: 2px         !default;
+$table-cell-padding-x: 8px         !default;
+
+// ── Code ──────────────────────────────────────────────────────────────────────
+$code-color:        $ink-1              !default;  // Distill keeps code in body ink
+$code-bg:           transparent         !default;  // inline code: monospace only, no background
+$code-block-bg:     rgba(0, 0, 0, 0.03) !default;
+$code-font-size:    0.875em             !default;  // ~14px
+
+// ── Navbar (Distill title bar: dt-header background) ──────────────────────────
+$navbar-bg: hsl(200, 60%, 15%)       !default;  // matches distill.pub dt-header
+$navbar-fg: rgba(255, 255, 255, 0.8) !default;
+$navbar-hl: #ffffff                  !default;
+
+
+/*-- scss:rules --*/
+
+// Quarto wraps document content in <main class="content">. Scoping the
+// Distill-specific rules here keeps the navbar, sidebar, and TOC untouched.
+
+// ── Document title block ──────────────────────────────────────────────────────
+#title-block-header .title {
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-bottom: 0.5rem;
+}
+
+#title-block-header .subtitle,
+#title-block-header .quarto-title .description {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  color: $ink-2;
+}
+
+// ── Section headings ──────────────────────────────────────────────────────────
+// Distill's signature underlined section header (markdown `##`).
+main.content h2 {
+  font-weight: 600;
+  line-height: 1.25em;
+  margin: 2rem 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $rule-soft;
+}
+
+main.content h3 {
+  font-weight: 700;
+  line-height: 1.4em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+// `####` becomes a small uppercase label, as in Distill.
+main.content h4 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.4em;
+}
+
+// ── Body links ────────────────────────────────────────────────────────────────
+// In Distill, prose links inherit the text color and carry a thin underline
+// that darkens on hover. Navigation, TOC, and header anchors keep their own
+// styling because they live outside <main class="content"> or are excluded here.
+main.content p a,
+main.content li a,
+main.content td a,
+main.content dd a,
+main.content figcaption a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid $rule-strong;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    color: inherit;
+    border-bottom-color: $ink-1;
+  }
+}
+
+// Don't draw a border under linked images.
+main.content a:has(> img) {
+  border-bottom: none;
+}
+
+// ── Blockquotes ───────────────────────────────────────────────────────────────
+main.content blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 2em;
+  border-left: 2px solid $rule-strong;
+  font-style: italic;
+  color: $ink-2;
+  font-size: 1rem;
+}
+
+// ── Tables ────────────────────────────────────────────────────────────────────
+// Distill tables: a header underline and a closing rule, no vertical lines.
+main.content table {
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid $rule-strong;
+}
+
+main.content table th {
+  text-align: left;
+  border-bottom: 1px solid $rule-strong;
+}
+
+main.content table td {
+  border-bottom: 1px solid $rule-faint;
+}
+
+main.content table tr:last-of-type td {
+  border-bottom: none;
+}
+
+main.content table th,
+main.content table td {
+  font-size: 0.9375rem;  // 15px
+  padding: 2px 8px;
+}
+
+// ── Figures & captions ────────────────────────────────────────────────────────
+main.content figure {
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
+}
+
+main.content figcaption,
+main.content .figure-caption,
+main.content .quarto-figure figcaption {
+  color: $ink-2;
+  font-size: 0.8125rem;  // 13px
+  line-height: 1.5em;
+}
+
+// ── Code ──────────────────────────────────────────────────────────────────────
+main.content div.sourceCode,
+main.content pre {
+  border-radius: 4px;
+}
+
+main.content pre {
+  font-size: 0.875rem;  // 14px
+}
+
+// ── Horizontal rules & misc ───────────────────────────────────────────────────
+main.content hr {
+  border: none;
+  border-bottom: 1px solid $rule-soft;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+// Section numbers stay quiet, matching Distill's kicker treatment.
+.header-section-number {
+  color: $ink-3;
+  font-weight: 600;
+}
+
+// ── Navbar ────────────────────────────────────────────────────────────────────
+.navbar {
+  border-bottom: 1px solid hsl(200, 60%, 10%);
+  box-shadow: none;
+}
+
+// ── Table of contents ─────────────────────────────────────────────────────────
+#TOC,
+nav[role="doc-toc"] {
+  font-size: 0.8rem;
+
+  ul > li > a {
+    color: $ink-2;
+
+    &:hover,
+    &.active {
+      color: $link-color;
+    }
+  }
+}

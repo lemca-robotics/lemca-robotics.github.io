@@ -2,8 +2,50 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "LEMCA",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Physical control tasks in the natural world, such as driving or object manipulation, frequently exhibit dramatic variations in sensory and compute complexity over time. Correspondingly, a natural resource-efficient choice for robot control is to dynamically switch between control modes with varying resource allocations. However, such “mode-switching controllers” (MSCs) have historically required laborious, expert-driven design and synthesis for each new task. Driven by these design difficulties, modern robotic control architectures often fall back to a wasteful “monolithic” one-size-fits-all structure, where resource allocation is permanently anchored to the hardest, most resource-intensive task phases. To facilitate the design of performant yet efficient MSCs, we propose LLM-Guided synthesis of Efficient Mode-Switching Control Architectures (LEMCA). LEMCA represents MSC designs as interpretable programs to be iteratively refined in an evolutionary loop. To evaluate design fitness, we propose MSC-compatible extensions of automated controller synthesis approaches, such as reinforcement learning in simulation. LEMCA then leverages the semantic priors, reasoning, and coding capabilities of Large Language Models (LLMs) to iteratively edit controller modes, their corresponding sensory-compute resource allocations, and mode transitions. Our experiments across diverse control benchmarks show that LEMCA consistently discovers strategies that surpass the Pareto frontier of monolithic designs by reclaiming wasted resources during “easy” task phases. LEMCA thus presents an automated, low-effort path to synthesize resource-efficient MSC designs.\n\n\n\nPaper OpenReview Code\n\n\n\n\nThe supplementary material is outlined as follows:\n\nTask Overview\nLEMCA Designs\n\npoint-to-disk\nRF-DMC\n\ncartpole-swingup\ncup-catch\nfinger-spin\n\nclutter-nav"
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "Physical control tasks in the natural world, such as driving or object manipulation, frequently exhibit dramatic variations in sensory and compute complexity over time. Correspondingly, a natural resource-efficient choice for robot control is to dynamically switch between control modes with varying resource allocations. However, such “mode-switching controllers” (MSCs) have historically required laborious, expert-driven design and synthesis for each new task. Driven by these design difficulties, modern robotic control architectures often fall back to a wasteful “monolithic” one-size-fits-all structure, where resource allocation is permanently anchored to the hardest, most resource-intensive task phases. To facilitate the design of performant yet efficient MSCs, we propose LLM-Guided synthesis of Efficient Mode-Switching Control Architectures (LEMCA). LEMCA represents MSC designs as interpretable programs to be iteratively refined in an evolutionary loop. To evaluate design fitness, we propose MSC-compatible extensions of automated controller synthesis approaches, such as reinforcement learning in simulation. LEMCA then leverages the semantic priors, reasoning, and coding capabilities of Large Language Models (LLMs) to iteratively edit controller modes, their corresponding sensory-compute resource allocations, and mode transitions. Our experiments across diverse control benchmarks show that LEMCA consistently discovers strategies that surpass the Pareto frontier of monolithic designs by reclaiming wasted resources during “easy” task phases. LEMCA thus presents an automated, low-effort path to synthesize resource-efficient MSC designs.\n\n\n\nPaper OpenReview Code"
+  },
+  {
+    "objectID": "index.html#supplementary-material-toc",
+    "href": "index.html#supplementary-material-toc",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "point-to-disk"
+  },
+  {
+    "objectID": "index.html#supplementary-material",
+    "href": "index.html#supplementary-material",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "point-to-disk"
+  },
+  {
+    "objectID": "index.html#supplementary-material-table-of-contents",
+    "href": "index.html#supplementary-material-table-of-contents",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "point-to-disk"
+  },
+  {
+    "objectID": "index.html#supp.-material-table-of-contents",
+    "href": "index.html#supp.-material-table-of-contents",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "point-to-disk"
+  },
+  {
+    "objectID": "index.html#table-of-contents",
+    "href": "index.html#table-of-contents",
+    "title": "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures",
+    "section": "",
+    "text": "The supplementary material is outlined as follows:\n\nTask Overview\nLEMCA Designs\n\npoint-to-disk\nRF-DMC\n\ncartpole-swingup\ncup-catch\nfinger-spin\n\nclutter-nav"
   }
 ]
