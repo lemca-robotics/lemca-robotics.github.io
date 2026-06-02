@@ -6,8 +6,12 @@ website:
   title: "LEMCA"
   navbar:
     left:
-      - href: index.qmd
-        text: Overview
+      - href: tasks/overview.qmd
+        text: Tasks
+      - href: designs.qmd
+        text: Best Designs
+      - href: dashboard-PR.qmd
+        text: PR-Dashboard
   favicon: favicon.ico
 
 

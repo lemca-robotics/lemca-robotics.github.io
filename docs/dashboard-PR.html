@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>LEMCA</title>
+<title>dashboard-pr – LEMCA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Best Designs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./dashboard-PR.html"> 
+    <a class="nav-link active" href="./dashboard-PR.html" aria-current="page"> 
 <span class="menu-text">PR-Dashboard</span></a>
   </li>  
 </ul>
@@ -112,21 +112,8 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#lemca-llm-guided-synthesis-of-efficient-mode-switching-control-architectures" id="toc-lemca-llm-guided-synthesis-of-efficient-mode-switching-control-architectures" class="nav-link active" data-scroll-target="#lemca-llm-guided-synthesis-of-efficient-mode-switching-control-architectures">LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures</a>
-  <ul class="collapse">
-  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a>
-  <ul class="collapse">
-  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
-  </ul></li>
-  <li><a href="#supplementary-material" id="toc-supplementary-material" class="nav-link" data-scroll-target="#supplementary-material">Supplementary Material</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -134,40 +121,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="lemca-llm-guided-synthesis-of-efficient-mode-switching-control-architectures" class="level1">
-<h1>LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures</h1>
-<section id="abstract" class="level2">
-<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<div style="text-align: justify;">
-<p>Physical control tasks in the natural world, such as driving or object manipulation, frequently exhibit dramatic variations in sensory and compute complexity over time. Correspondingly, a natural resource-efficient choice for robot control is to dynamically switch between control modes with varying resource allocations. However, such “mode-switching controllers” (MSCs) have historically required laborious, expert-driven design and synthesis for each new task. Driven by these design difficulties, modern robotic control architectures often fall back to a wasteful “monolithic” one-size-fits-all structure, where resource allocation is permanently anchored to the hardest, most resource-intensive task phases. To facilitate the design of performant yet efficient MSCs, we propose LLM-Guided synthesis of Efficient Mode-Switching Control Architectures (LEMCA). LEMCA represents MSC designs as interpretable programs to be iteratively refined in an evolutionary loop. To evaluate design fitness, we propose MSC-compatible extensions of automated controller synthesis approaches, such as reinforcement learning in simulation. LEMCA then leverages the semantic priors, reasoning, and coding capabilities of Large Language Models (LLMs) to iteratively edit controller modes, their corresponding sensory-compute resource allocations, and mode transitions. Our experiments across diverse control benchmarks show that LEMCA consistently discovers strategies that surpass the Pareto frontier of monolithic designs by reclaiming wasted resources during “easy” task phases. LEMCA thus presents an automated, low-effort path to synthesize resource-efficient MSC designs.</p>
-</div>
-<section id="links" class="level3">
-<h3 class="anchored" data-anchor-id="links">Links</h3>
-<p><a href="./" class="btn btn-primary disabled" role="button">Paper</a> <a href="./" class="btn btn-primary disabled" role="button">OpenReview</a> <a href="./" class="btn btn-primary disabled" role="button">Code</a></p>
-</section>
-</section>
-<section id="supplementary-material" class="level2">
-<h2 class="anchored" data-anchor-id="supplementary-material">Supplementary Material</h2>
-<p>The supplementary material is organized as follows:</p>
-<ul>
-<li><a href="./tasks/overview.html"><strong>Task Description</strong></a> <br><em>Provides an overview of the following tasks LEMCA is evaluated on.</em>
-<ul>
-<li><code>point-to-disk</code></li>
-<li><code>RF-DMC</code>
-<ul>
-<li><code>cartpole-swingup</code></li>
-<li><code>cup-catch</code></li>
-<li><code>finger-spin</code></li>
-</ul></li>
-<li><code>clutter-nav</code></li>
-</ul></li>
-<li><a href="./designs.html"><strong>Best Designs</strong></a> <br><em>Outlines the best designs synthesized by LEMCA for each task.</em></li>
-<li><a href="./dashboard-PR.html"><strong>Performance-Resource Dashboard</strong></a> <br><em>An interactive dashboard visualizing LEMCA’s design process on the performance-resource plane.</em></li>
-</ul>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
