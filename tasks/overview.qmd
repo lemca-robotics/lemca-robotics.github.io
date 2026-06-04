@@ -1,5 +1,7 @@
 ---
 title: "Tasks"
+include-in-header:
+  - text: '<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>'
 ---
 
 ::: {.hidden}
@@ -229,7 +231,7 @@ $$
 \def\mF{{\bm{F}}}
 \def\mG{{\bm{G}}}
 \def\mH{{\bm{H}}}
-\def\mI{{\bm{I}}}
+\def\mI{{\mathbf{I}}}
 \def\mJ{{\bm{J}}}
 \def\mK{{\bm{K}}}
 \def\mL{{\bm{L}}}
@@ -444,20 +446,15 @@ $$
 $$
 :::
 
+This section provides a overview of the tasks evaluated in the paper.
+
+- [`point-to-disk`](#point-to-disk)
+- [`RF-DMC`](#rf-dmc)
+- [`clutter-nav`](#clutter-nav)
+
 # `point-to-disk`
 
-A velocity-controlled point-mass with state $\rvx$ (cartesian position) must be driven into a target disk of radius $r^* = 0.01$ at the origin and held there.
-Given a velocity command $\rvu$, the system evolves as $\dot{\rvx} = \rvv$ with $\rvv \sim B_\epsilon(\rvu) := \{ \rvv : ||\rvv - \rvu||_2 \leq \eps ||\rvu||_2 \}$ ($\eps = 0.25$ in our experiments).
-The actuation noise grows with the commanded speed, so slowing down ($\rvu \to \mathbf{0}$) allows the controller to suppress actuation noise.
-The controller, operating at 50 Hz, is scored by its dwell time inside the target for rollouts of length $H = 500$ steps (10 s) from states on the unit circle,
-$\rmJ(\pi) = \E_{\pi,\,\{\rvx_0 : ||\rvx_0||_2 = 1\}}\left[ \sum_{t=0}^H \Ind{||\rvx_t||_2 < r^*} \right]$.
-
-::: {.column-margin}
-![Illustration of point-to-disk dynamics](assets/point-to-disk/dynamics.svg){width=100%}
-:::
-
-The designer's goal is to meet a performance target $\rmJ_\text{target}$ while minimizing the sensing cost incurred.
-
+{{< include point-to-disk.qmd >}}
 
 # `RF-DMC`
 

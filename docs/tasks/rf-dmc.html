@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>point-to-disk – LEMCA</title>
+<title>rf-dmc – LEMCA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,35 +68,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -145,57 +116,11 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 
 
-<p>A velocity-controlled point-mass with state <span class="math inline">\(\rvx\)</span> (cartesian position) must be driven into a target disk of radius <span class="math inline">\(r^* = 0.01\)</span> m at the origin and held there. Given a velocity command <span class="math inline">\(\rvu\)</span>, the system evolves as <span class="math inline">\(\dot{\rvx} = \rvv\)</span> with <span class="math inline">\(\rvv \sim B_\epsilon(\rvu) := \{ \rvv : ||\rvv - \rvu||_2 \leq \eps ||\rvu||_2 \}\)</span> (<span class="math inline">\(\eps = 0.25\)</span> in our experiments). The actuation noise grows with the commanded speed, so slowing down (<span class="math inline">\(\rvu \to \mathbf{0}\)</span>) allows the controller to suppress actuation noise. The controller, operating at 50 Hz, is scored by its dwell time inside the target for rollouts of length <span class="math inline">\(H = 500\)</span> steps (10 s) from states on the unit circle: <span class="math display">\[\rmJ(\pi) = \E_{\pi,\,\{\rvx_0 : ||\rvx_0||_2 = 1\}}\left[ \sum_{t=0}^H \Ind{||\rvx_t||_2 &lt; r^*} \right]\]</span></p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="assets/point-to-disk/dynamics.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Illustration of point-to-disk dynamics</figcaption>
-</figure>
-</div>
-</div></div><p>Fixing a coordinate system XY, the robot can move at most 1 m/s in either direction, so the action space is <span class="math inline">\(\gA = [-1, 1]^2\)</span>. <a href="#fig-p2d-oracle" class="quarto-xref">Figure&nbsp;1</a> illustrates a quiver plot of an oracle policy that has access to the perfect state <span class="math inline">\(\rvx\)</span>. The policy commands the maximum possible velocity towards the target when outside the disk, and starts slowing down to zero as it enters the target disk. The oracle policy achieves a performance of <span class="math inline">\(\rmJ_\text{oracle} = 456.23 \pm 4.59\)</span> (<span class="math inline">\(N=1000\)</span>).</p>
-<div id="fig-p2d-oracle" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-p2d-oracle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="assets/point-to-disk/oracle_policy.svg" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p2d-oracle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Quiver plot of oracle policy on <code>point-to-disk</code> task.
-</figcaption>
-</figure>
-</div>
-<p><strong>Sensors</strong> The designer can equip the various controller modes with the following sensor types. Each sensor reveals a different slice of the robot’s position <span class="math inline">\(\rvx\)</span>, as illustrated in <a href="#fig-p2d-sensors" class="quarto-xref">Figure&nbsp;2</a> .</p>
-<ul>
-<li><p><code>Cartesian</code> (<code>GPS</code>): noisy position <span class="math inline">\(\rvx + \gN(0, \sigma_\text{xy}^2 \mI_2)\)</span>, with <span class="math inline">\(\sigma_\text{xy} \in \{0,\,10^{-2},\,5{\cdot}10^{-2},\,10^{-1},\,5{\cdot}10^{-1}\}\)</span>.</p></li>
-<li><p><code>Radial</code> &amp; <code>Sector</code> (<code>RadialSector</code>): a discretized polar reading returning the active sector among <span class="math inline">\(s \in [1,360]\)</span> equiangular sectors (optionally offset by <span class="math inline">\(\phi\)</span> radians) and the active radial band among <span class="math inline">\(\text{len}(\rvd){+}1\)</span> bands defined by increasing distance thresholds <span class="math inline">\(\rvd = (d_1, \dots) \le 1\)</span>.</p>
-<ul>
-<li>The per-step output is a concatenation of the one-hot over radial bands (empty when <span class="math inline">\(\rvd = ()\)</span>) and unit-vector <span class="math inline">\((\cos\theta_s,\sin\theta_s)\)</span> corresponding to centroid of the active sector.</li>
-<li>There is some Gaussian noise in measuring the polar coordinates of the robot <span class="math inline">\((r, \theta)\)</span>.
-<ul>
-<li>The noise scales are tunable with <span class="math inline">\(\sigma_\theta \in \{0,\,10^{-1},\,2{\cdot}10^{-1},\,4{\cdot}10^{-1},\,8{\cdot}10^{-1}\}\)</span> and <span class="math inline">\(\sigma_r \in \{0,\,10^{-2},\,5{\cdot}10^{-2},\,10^{-1}\}\)</span>.</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>The designer’s goal is to meet a performance target <span class="math inline">\(\rmJ_\text{target}\)</span> while minimizing the sensing cost incurred.</p>
-<div id="fig-p2d-sensors" class="column-page quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-p2d-sensors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="p2d-sensors">
-
-</div>
-<script src="assets/point-to-disk/sensor_viz.js"></script>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p2d-sensors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Interactive visualization of sensors for the <code>point-to-disk</code> task. Configure the parameters of <code>RadialSector</code> (left) and <code>GPS</code> (right) and click inside the unit circle (dashed line) to probe the robot’s instantaneous observation. The visualization depicts the costs of the configurations under the cost-structures CheapGPS and CostlyGPS on the top. The cost difference between the <code>RadialSector</code> (left) and <code>GPS</code> (right) configurations is depicted in the center, with a <span style="color:rgb(139, 26, 26)">RED</span> background indicating a cheaper <code>RadialSector</code> configuration.
-</figcaption>
-</figure>
-</div>
 
 
 
