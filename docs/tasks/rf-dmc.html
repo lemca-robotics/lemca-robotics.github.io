@@ -67,7 +67,231 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+(function () {
+  window.MathJax = window.MathJax || {};
+  window.MathJax.tex = window.MathJax.tex || {};
+  window.MathJax.tex.macros = Object.assign(window.MathJax.tex.macros || {}, {
+    // floor / ceil
+    ceil:  ['\\lceil #1 \\rceil', 1],
+    floor: ['\\lfloor #1 \\rfloor', 1],
 
+    // scalar shorthands
+    eps:  '{\\epsilon}',
+    reta: '{\\textnormal{\\eta}}',
+    ra: '{\\textnormal{a}}', rb: '{\\textnormal{b}}', rc: '{\\textnormal{c}}',
+    rd: '{\\textnormal{d}}', re: '{\\textnormal{e}}', rf: '{\\textnormal{f}}',
+    rg: '{\\textnormal{g}}', rh: '{\\textnormal{h}}', ri: '{\\textnormal{i}}',
+    rj: '{\\textnormal{j}}', rk: '{\\textnormal{k}}', rl: '{\\textnormal{l}}',
+    rn: '{\\textnormal{n}}', ro: '{\\textnormal{o}}', rp: '{\\textnormal{p}}',
+    rq: '{\\textnormal{q}}', rr: '{\\textnormal{r}}', rs: '{\\textnormal{s}}',
+    rt: '{\\textnormal{t}}', ru: '{\\textnormal{u}}', rv: '{\\textnormal{v}}',
+    rw: '{\\textnormal{w}}', rx: '{\\textnormal{x}}', ry: '{\\textnormal{y}}',
+    rz: '{\\textnormal{z}}',
+
+    // random vectors
+    rvepsilon: '{\\mathbf{\\epsilon}}', rvtheta: '{\\mathbf{\\theta}}',
+    rva: '{\\mathbf{a}}', rvb: '{\\mathbf{b}}', rvc: '{\\mathbf{c}}',
+    rvd: '{\\mathbf{d}}', rve: '{\\mathbf{e}}', rvf: '{\\mathbf{f}}',
+    rvg: '{\\mathbf{g}}', rvh: '{\\mathbf{h}}', rvj: '{\\mathbf{j}}',
+    rvk: '{\\mathbf{k}}', rvl: '{\\mathbf{l}}', rvm: '{\\mathbf{m}}',
+    rvn: '{\\mathbf{n}}', rvo: '{\\mathbf{o}}', rvp: '{\\mathbf{p}}',
+    rvq: '{\\mathbf{q}}', rvr: '{\\mathbf{r}}', rvs: '{\\mathbf{s}}',
+    rvt: '{\\mathbf{t}}', rvu: '{\\mathbf{u}}', rvv: '{\\mathbf{v}}',
+    rvw: '{\\mathbf{w}}', rvx: '{\\mathbf{x}}', rvy: '{\\mathbf{y}}',
+    rvz: '{\\mathbf{z}}',
+
+    // elements of random vectors
+    erva: '{\\textnormal{a}}', ervb: '{\\textnormal{b}}', ervc: '{\\textnormal{c}}',
+    ervd: '{\\textnormal{d}}', erve: '{\\textnormal{e}}', ervf: '{\\textnormal{f}}',
+    ervg: '{\\textnormal{g}}', ervh: '{\\textnormal{h}}', ervi: '{\\textnormal{i}}',
+    ervj: '{\\textnormal{j}}', ervk: '{\\textnormal{k}}', ervl: '{\\textnormal{l}}',
+    ervm: '{\\textnormal{m}}', ervn: '{\\textnormal{n}}', ervo: '{\\textnormal{o}}',
+    ervp: '{\\textnormal{p}}', ervq: '{\\textnormal{q}}', ervr: '{\\textnormal{r}}',
+    ervs: '{\\textnormal{s}}', ervt: '{\\textnormal{t}}', ervu: '{\\textnormal{u}}',
+    ervv: '{\\textnormal{v}}', ervw: '{\\textnormal{w}}', ervx: '{\\textnormal{x}}',
+    ervy: '{\\textnormal{y}}', ervz: '{\\textnormal{z}}',
+
+    // random matrices (bold)
+    rmA: '{\\mathbf{A}}', rmB: '{\\mathbf{B}}', rmC: '{\\mathbf{C}}',
+    rmD: '{\\mathbf{D}}', rmE: '{\\mathbf{E}}', rmF: '{\\mathbf{F}}',
+    rmG: '{\\mathbf{G}}', rmH: '{\\mathbf{H}}', rmI: '{\\mathbf{I}}',
+    rmK: '{\\mathbf{K}}', rmL: '{\\mathbf{L}}', rmM: '{\\mathbf{M}}',
+    rmN: '{\\mathbf{N}}', rmO: '{\\mathbf{O}}', rmP: '{\\mathbf{P}}',
+    rmQ: '{\\mathbf{Q}}', rmS: '{\\mathbf{S}}', rmT: '{\\mathbf{T}}',
+    rmU: '{\\mathbf{U}}', rmV: '{\\mathbf{V}}', rmW: '{\\mathbf{W}}',
+    rmX: '{\\mathbf{X}}', rmY: '{\\mathbf{Y}}', rmZ: '{\\mathbf{Z}}',
+
+    // elements of random matrices
+    ermA: '{\\textnormal{A}}', ermB: '{\\textnormal{B}}', ermC: '{\\textnormal{C}}',
+    ermD: '{\\textnormal{D}}', ermE: '{\\textnormal{E}}', ermF: '{\\textnormal{F}}',
+    ermG: '{\\textnormal{G}}', ermH: '{\\textnormal{H}}', ermI: '{\\textnormal{I}}',
+    ermJ: '{\\textnormal{J}}', ermK: '{\\textnormal{K}}', ermL: '{\\textnormal{L}}',
+    ermM: '{\\textnormal{M}}', ermN: '{\\textnormal{N}}', ermO: '{\\textnormal{O}}',
+    ermP: '{\\textnormal{P}}', ermQ: '{\\textnormal{Q}}', ermR: '{\\textnormal{R}}',
+    ermS: '{\\textnormal{S}}', ermT: '{\\textnormal{T}}', ermU: '{\\textnormal{U}}',
+    ermV: '{\\textnormal{V}}', ermW: '{\\textnormal{W}}', ermX: '{\\textnormal{X}}',
+    ermY: '{\\textnormal{Y}}', ermZ: '{\\textnormal{Z}}',
+
+    // vectors (bold)
+    vzero: '{\\mathbf{0}}', vone: '{\\mathbf{1}}',
+    vmu: '{\\boldsymbol{\\mu}}', vtheta: '{\\boldsymbol{\\theta}}',
+    va: '{\\mathbf{a}}', vb: '{\\mathbf{b}}', vc: '{\\mathbf{c}}',
+    vd: '{\\mathbf{d}}', ve: '{\\mathbf{e}}', vf: '{\\mathbf{f}}',
+    vg: '{\\mathbf{g}}', vh: '{\\mathbf{h}}', vi: '{\\mathbf{i}}',
+    vj: '{\\mathbf{j}}', vk: '{\\mathbf{k}}', vl: '{\\mathbf{l}}',
+    vm: '{\\mathbf{m}}', vn: '{\\mathbf{n}}', vo: '{\\mathbf{o}}',
+    vp: '{\\mathbf{p}}', vq: '{\\mathbf{q}}', vr: '{\\mathbf{r}}',
+    vs: '{\\mathbf{s}}', vt: '{\\mathbf{t}}', vu: '{\\mathbf{u}}',
+    vv: '{\\mathbf{v}}', vw: '{\\mathbf{w}}', vx: '{\\mathbf{x}}',
+    vy: '{\\mathbf{y}}', vz: '{\\mathbf{z}}',
+
+    // elements of vectors
+    evalpha: '{\\alpha}',   evbeta: '{\\beta}',    evepsilon: '{\\epsilon}',
+    evlambda: '{\\lambda}', evomega: '{\\omega}',  evmu: '{\\mu}',
+    evpsi: '{\\psi}',       evsigma: '{\\sigma}',  evtheta: '{\\theta}',
+    eva: '{a}', evb: '{b}', evc: '{c}', evd: '{d}', eve: '{e}',
+    evf: '{f}', evg: '{g}', evh: '{h}', evi: '{i}', evj: '{j}',
+    evk: '{k}', evl: '{l}', evm: '{m}', evn: '{n}', evo: '{o}',
+    evp: '{p}', evq: '{q}', evr: '{r}', evs: '{s}', evt: '{t}',
+    evu: '{u}', evv: '{v}', evw: '{w}', evx: '{x}', evy: '{y}',
+    evz: '{z}',
+
+    // matrices
+    mA: '{\\mathbf{A}}', mB: '{\\mathbf{B}}', mC: '{\\mathbf{C}}',
+    mD: '{\\mathbf{D}}', mE: '{\\mathbf{E}}', mF: '{\\mathbf{F}}',
+    mG: '{\\mathbf{G}}', mH: '{\\mathbf{H}}', mI: '{\\mathbf{I}}',
+    mJ: '{\\mathbf{J}}', mK: '{\\mathbf{K}}', mL: '{\\mathbf{L}}',
+    mM: '{\\mathbf{M}}', mN: '{\\mathbf{N}}', mO: '{\\mathbf{O}}',
+    mP: '{\\mathbf{P}}', mQ: '{\\mathbf{Q}}', mR: '{\\mathbf{R}}',
+    mS: '{\\mathbf{S}}', mT: '{\\mathbf{T}}', mU: '{\\mathbf{U}}',
+    mV: '{\\mathbf{V}}', mW: '{\\mathbf{W}}', mX: '{\\mathbf{X}}',
+    mY: '{\\mathbf{Y}}', mZ: '{\\mathbf{Z}}',
+    mBeta: '{\\boldsymbol{\\beta}}', mPhi: '{\\boldsymbol{\\Phi}}',
+    mLambda: '{\\boldsymbol{\\Lambda}}', mSigma: '{\\boldsymbol{\\Sigma}}',
+
+    // tensors (mathsfit not available in MathJax; fall back to mathbf)
+    tens:  ['\\mathbf{#1}', 1],
+    etens: ['\\mathit{#1}', 1],
+    tA: '{\\mathbf{A}}', tB: '{\\mathbf{B}}', tC: '{\\mathbf{C}}',
+    tD: '{\\mathbf{D}}', tE: '{\\mathbf{E}}', tF: '{\\mathbf{F}}',
+    tG: '{\\mathbf{G}}', tH: '{\\mathbf{H}}', tI: '{\\mathbf{I}}',
+    tJ: '{\\mathbf{J}}', tK: '{\\mathbf{K}}', tL: '{\\mathbf{L}}',
+    tM: '{\\mathbf{M}}', tN: '{\\mathbf{N}}', tO: '{\\mathbf{O}}',
+    tP: '{\\mathbf{P}}', tQ: '{\\mathbf{Q}}', tR: '{\\mathbf{R}}',
+    tS: '{\\mathbf{S}}', tT: '{\\mathbf{T}}', tU: '{\\mathbf{U}}',
+    tV: '{\\mathbf{V}}', tW: '{\\mathbf{W}}', tX: '{\\mathbf{X}}',
+    tY: '{\\mathbf{Y}}', tZ: '{\\mathbf{Z}}',
+
+    // graphs / sets
+    gA: '{\\mathcal{A}}', gB: '{\\mathcal{B}}', gC: '{\\mathcal{C}}',
+    gD: '{\\mathcal{D}}', gE: '{\\mathcal{E}}', gF: '{\\mathcal{F}}',
+    gG: '{\\mathcal{G}}', gH: '{\\mathcal{H}}', gI: '{\\mathcal{I}}',
+    gJ: '{\\mathcal{J}}', gK: '{\\mathcal{K}}', gL: '{\\mathcal{L}}',
+    gM: '{\\mathcal{M}}', gN: '{\\mathcal{N}}', gO: '{\\mathcal{O}}',
+    gP: '{\\mathcal{P}}', gQ: '{\\mathcal{Q}}', gR: '{\\mathcal{R}}',
+    gS: '{\\mathcal{S}}', gT: '{\\mathcal{T}}', gU: '{\\mathcal{U}}',
+    gV: '{\\mathcal{V}}', gW: '{\\mathcal{W}}', gX: '{\\mathcal{X}}',
+    gY: '{\\mathcal{Y}}', gZ: '{\\mathcal{Z}}',
+
+    sA: '{\\mathbb{A}}', sB: '{\\mathbb{B}}', sC: '{\\mathbb{C}}',
+    sD: '{\\mathbb{D}}', sF: '{\\mathbb{F}}', sG: '{\\mathbb{G}}',
+    sH: '{\\mathbb{H}}', sI: '{\\mathbb{I}}', sJ: '{\\mathbb{J}}',
+    sK: '{\\mathbb{K}}', sL: '{\\mathbb{L}}', sM: '{\\mathbb{M}}',
+    sN: '{\\mathbb{N}}', sO: '{\\mathbb{O}}', sP: '{\\mathbb{P}}',
+    sQ: '{\\mathbb{Q}}', sR: '{\\mathbb{R}}', sS: '{\\mathbb{S}}',
+    sT: '{\\mathbb{T}}', sU: '{\\mathbb{U}}', sV: '{\\mathbb{V}}',
+    sW: '{\\mathbb{W}}', sX: '{\\mathbb{X}}', sY: '{\\mathbb{Y}}',
+    sZ: '{\\mathbb{Z}}',
+
+    // matrix entries
+    emLambda: '{\\Lambda}', emSigma: '{\\Sigma}',
+    emA: '{A}', emB: '{B}', emC: '{C}', emD: '{D}', emE: '{E}',
+    emF: '{F}', emG: '{G}', emH: '{H}', emI: '{I}', emJ: '{J}',
+    emK: '{K}', emL: '{L}', emM: '{M}', emN: '{N}', emO: '{O}',
+    emP: '{P}', emQ: '{Q}', emR: '{R}', emS: '{S}', emT: '{T}',
+    emU: '{U}', emV: '{V}', emW: '{W}', emX: '{X}', emY: '{Y}',
+    emZ: '{Z}',
+
+    // tensor entries
+    etLambda: '{\\mathit{\\Lambda}}',
+    etA: '{\\mathit{A}}', etB: '{\\mathit{B}}', etC: '{\\mathit{C}}',
+    etD: '{\\mathit{D}}', etE: '{\\mathit{E}}', etF: '{\\mathit{F}}',
+    etG: '{\\mathit{G}}', etH: '{\\mathit{H}}', etI: '{\\mathit{I}}',
+    etJ: '{\\mathit{J}}', etK: '{\\mathit{K}}', etL: '{\\mathit{L}}',
+    etM: '{\\mathit{M}}', etN: '{\\mathit{N}}', etO: '{\\mathit{O}}',
+    etP: '{\\mathit{P}}', etQ: '{\\mathit{Q}}', etR: '{\\mathit{R}}',
+    etS: '{\\mathit{S}}', etT: '{\\mathit{T}}', etU: '{\\mathit{U}}',
+    etV: '{\\mathit{V}}', etW: '{\\mathit{W}}', etX: '{\\mathit{X}}',
+    etY: '{\\mathit{Y}}', etZ: '{\\mathit{Z}}',
+
+    // standard operators and shorthands
+    laplace:       '\\mathrm{Laplace}',
+    E:             '\\mathbb{E}',
+    Ls:            '\\mathcal{L}',
+    R:             '\\mathbb{R}',
+    emp:           '\\tilde{p}',
+    lr:            '\\alpha',
+    reg:           '\\lambda',
+    rect:          '\\mathrm{rectifier}',
+    softmax:       '\\mathrm{softmax}',
+    sigmoid:       '\\sigma',
+    softplus:      '\\zeta',
+    KL:            'D_{\\mathrm{KL}}',
+    TV:            '\\delta_{\\mathrm{TV}}',
+    Var:           '\\mathrm{Var}',
+    standarderror: '\\mathrm{SE}',
+    Cov:           '\\mathrm{Cov}',
+    normlzero:     'L^0',
+    normlone:      'L^1',
+    normltwo:      'L^2',
+    normlp:        'L^p',
+    normmax:       'L^{\\infty}',
+    parents:       '\\mathrm{Pa}',
+    argmax:        '\\operatorname*{arg\\,max}',
+    argmin:        '\\operatorname*{arg\\,min}',
+    sign:          '\\operatorname{sign}',
+    Tr:            '\\operatorname{Tr}',
+    ab:            '\\allowbreak',
+    Ind:           ['\\mathbb{1}_{\\left[#1\\right]}', 1],
+
+    // custom overrides (rmR / rmJ as roman, not bold)
+    rmR: '\\mathrm{R}',
+    rmJ: '\\mathrm{J}',
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -97,10 +321,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../designs.html"> 
 <span class="menu-text">Best Designs</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../dashboard-PR.html"> 
-<span class="menu-text">PR-Dashboard</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -112,17 +332,234 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rf-dmc" id="toc-rf-dmc" class="nav-link active" data-scroll-target="#rf-dmc"><code>RF-DMC</code></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 
 
+<section id="rf-dmc" class="level1 page-columns page-full">
+<h1><code>RF-DMC</code></h1>
+<p>We construct rangefinder variants of three <code>dm_control</code> tasks — <code>cartpole-swingup</code>, <code>cup-catch</code>, and <code>finger-spin</code>. In each, the agent observes the world through a RayScanSensor consisting of 360 equiangular rangefinders, spanning <span class="math inline">\(360^\circ\)</span>, rigidly attached to a task-relevant body site (pole tip, cup center, fingertip). This rangefinders report the distance to the nearest surface as visualized in <a href="#fig-rf-dmc" class="quarto-xref">Figure&nbsp;1</a>. The rollouts and performance of the oracle policies on these tasks are visualized in <a href="#fig-rf-dmc-rollouts" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<style>
+#fig-rf-dmc .quarto-layout-panel {
+  margin-bottom: -1em !important;
+}
+</style>
+<div class="column-page">
+<div id="fig-rf-dmc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rf-dmc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-rf-dmc-cartpole" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-rf-dmc-cartpole-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="assets/RF-DMC/cartpole-swingup.png" data-ref-parent="fig-rf-dmc" height="300" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-rf-dmc-cartpole-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <code>cartpole-swingup</code>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-rf-dmc-cup-catch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-rf-dmc-cup-catch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="assets/RF-DMC/cup-catch.png" data-ref-parent="fig-rf-dmc" height="300" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-rf-dmc-cup-catch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <code>cup-catch</code>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-rf-dmc-finger-spin" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-rf-dmc-finger-spin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="assets/RF-DMC/finger-spin.png" data-ref-parent="fig-rf-dmc" height="300" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-rf-dmc-finger-spin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) <code>finger-spin</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rf-dmc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Visualization of the RF-DMC tasks and the RayScanSensor observations.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="column-page">
+<div id="fig-rf-dmc-rollouts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rf-dmc-rollouts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<style>
+.oracle-row { display: flex; gap: .75rem; }
+.oracle-col { flex: 1; min-width: 0; }
+.oracle-task-name { font-family: monospace; font-size: 1.0rem; text-align: center; margin: 0 0 .35rem; }
+.oracle-col video { width: 100%; aspect-ratio: 1; display: block; border-radius: 6px; background: #111; }
+.rollout-btns { display: flex; gap: .3rem; margin-top: .4rem; justify-content: center; align-items: center; }
+.rollout-btns .rollout-label { font-size: .75rem; margin-right: .15rem; }
+.rollout-btns button {
+  font-size: .75rem; padding: 1px 8px; border: 1px solid #aaa;
+  border-radius: 4px; background: transparent; cursor: pointer; color: inherit;
+}
+.rollout-btns button.active { background: #555; color: #fff; border-color: #555; }
+</style>
+
+<div class="oracle-row">
+
+  <!-- cartpole-swingup -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>cartpole-swingup</code></p>
+    <video id="vid-cartpole" autoplay="" loop="" muted="" playsinline="" controls=""></video>
+    <div class="rollout-btns" id="btns-cartpole">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+
+  <!-- cup-catch -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>cup-catch</code></p>
+    <video id="vid-cup" autoplay="" loop="" muted="" playsinline="" controls=""></video>
+    <div class="rollout-btns" id="btns-cup">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+
+  <!-- finger-spin -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>finger-spin</code></p>
+    <video id="vid-finger" autoplay="" loop="" muted="" playsinline="" controls=""></video>
+    <div class="rollout-btns" id="btns-finger">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+</div>
+<br>
+<script>
+(function () {
+  [['vid-cartpole','btns-cartpole'], ['vid-cup','btns-cup'], ['vid-finger','btns-finger']].forEach(function(pair) {
+    var vid = document.getElementById(pair[0]);
+    var btns = document.getElementById(pair[1]);
+    if (!vid || !btns) return;
+    var cache = {};
+
+    function load(src, btn) {
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = true; });
+      if (cache[src]) {
+        setBlob(cache[src], btn);
+        return;
+      }
+      fetch(src)
+        .then(function(r) { return r.blob(); })
+        .then(function(blob) {
+          cache[src] = URL.createObjectURL(blob);
+          setBlob(cache[src], btn);
+        })
+        .catch(function() { btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; }); });
+    }
+
+    function setBlob(url, btn) {
+      if (vid._blobUrl && vid._blobUrl !== url) URL.revokeObjectURL(vid._blobUrl);
+      vid._blobUrl = url;
+      vid.src = url;
+      vid.load();
+      vid.play().catch(function(){});
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; });
+      if (btn) { btns.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); }
+    }
+
+    btns.querySelectorAll('button').forEach(function(btn) {
+      btn.addEventListener('click', function() { load(btn.dataset.src, btn); });
+    });
+    load(btns.querySelector('button.active').dataset.src, null);
+  });
+})();
+</script>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><span class="math inline">\(\rmJ_\text{oracle} = 881.8 \pm 4.9\)</span></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><span class="math inline">\(\rmJ_\text{oracle} = 977.8 \pm 15.7\)</span></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><span class="math inline">\(\rmJ_\text{oracle} = 969.9 \pm 11.7\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rf-dmc-rollouts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Rollouts of oracle policies on the <code>RF-DMC</code> tasks. The performance is reported over 1000 rollouts.
+</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>Rangefinder noise model</strong> We adopt the popular mixture-of-noise model (Probabilistic Robotics, Thrun et al.) to corrupt true range measurements <span class="math inline">\(z^*\)</span>, in the range <span class="math inline">\([z_\text{min}, z_\text{max}] = [0, 10]\)</span> m, with the following noise components:</p>
+<ul>
+<li><strong>hit</strong> — measurement noise, <span class="math inline">\(\gN(z^*, \sigma_\text{hit}^2)\)</span>, truncated gaussian located at the true range, clipped to <span class="math inline">\([z_\text{min}, z_\text{max}]\)</span> (weight <span class="math inline">\(c_\text{hit}\)</span>)</li>
+<li><strong>short</strong> — interfering obstacles, <span class="math inline">\(\propto \text{Exp}(\lambda_\text{short})\)</span> on <span class="math inline">\([0, z^*]\)</span> (weight <span class="math inline">\(c_\text{short}\)</span>, held at <span class="math inline">\(0\)</span> across grades in our experiments)</li>
+<li><strong>max</strong> — missed detections, <span class="math inline">\(\delta\)</span>-spike at <span class="math inline">\(z_\text{max}\)</span> (weight <span class="math inline">\(c_\text{max}\)</span>)</li>
+<li><strong>rand</strong> — random noise, uniform over the measured range <span class="math inline">\([z_\text{min}, z_\text{max}]\)</span> (weight <span class="math inline">\(c_\text{rand}\)</span>).</li>
+</ul>
+<p>The designer tunes discrete sensor <code>quality</code> levels <span class="math inline">\(\in \{\texttt{A}, \dots, \texttt{F}\}\)</span> that set operating specific mixture weights and measurement noise scales <span class="math inline">\(\sigma_\text{hit}\)</span>. The per-step <strong>sensor cost</strong> is <span class="math inline">\(\big(\text{energy}(\texttt{quality}) + \tfrac12 \log_2 H\big)\cdot n_\text{rays}\)</span>, where the per-ray grade energy is obtained from the SNR for the chosen rangefinder noise model, <span class="math inline">\(H\)</span> is the observation history length, and <span class="math inline">\(360 / n_\text{rays}\)</span> is the angular resolution. <a href="#fig-rf-dmc-noise" class="quarto-xref">Figure&nbsp;3</a> presents an interactive visualization of the noise model and sensor costs for the <code>RF-DMC</code> sensor configurations.</p>
+<div id="fig-rf-dmc-noise" class="column-page quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rf-dmc-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="rf-dmc-noise">
+
+</div>
+<script src="assets/RF-DMC/sensor_viz.js"></script>
+<br>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rf-dmc-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Interactive visualization of the Rangefinder noise model. <strong>Left:</strong> For the selected sensor <code>quality</code> (<code>A</code>–<code>F</code>) and true range <span class="math inline">\(z^*\)</span>; the panel below reports the grade’s mixture weights and measurement statistics. <strong>Center:</strong> visualizes the density <span class="math inline">\(p(z \mid z^*)\)</span>. <strong>Right:</strong> reports the per-step sensor cost of the configuration.
+</figcaption>
+</figure>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

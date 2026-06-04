@@ -1,0 +1,175 @@
+---
+include-in-header:
+  - text: '<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>'
+---
+# `RF-DMC`
+
+We construct rangefinder variants of three `dm_control` tasks --- `cartpole-swingup`, `cup-catch`, and `finger-spin`.
+In each, the agent observes the world through a RayScanSensor consisting of 360 equiangular rangefinders, spanning $360^\circ$, rigidly attached to a task-relevant body site (pole tip, cup center, fingertip). This rangefinders report the distance to the nearest surface as visualized in @fig-rf-dmc\.
+The rollouts and performance of the oracle policies on these tasks are visualized in @fig-rf-dmc-rollouts.
+
+<style>
+#fig-rf-dmc .quarto-layout-panel {
+  margin-bottom: -1em !important;
+}
+</style>
+
+::: {.column-page}
+
+::: { #fig-rf-dmc}
+::: {layout-ncol=3 layout-valign="top"}
+![`cartpole-swingup`](assets/RF-DMC/cartpole-swingup.png){#fig-rf-dmc-cartpole height=300px}
+
+![`cup-catch`](assets/RF-DMC/cup-catch.png){#fig-rf-dmc-cup-catch height=300px}
+
+![`finger-spin`](assets/RF-DMC/finger-spin.png){#fig-rf-dmc-finger-spin height=300px}
+:::
+
+Visualization of the RF-DMC tasks and the RayScanSensor observations.
+:::
+:::
+
+::: {.column-page}
+::: { #fig-rf-dmc-rollouts }
+
+```{=html}
+<style>
+.oracle-row { display: flex; gap: .75rem; }
+.oracle-col { flex: 1; min-width: 0; }
+.oracle-task-name { font-family: monospace; font-size: 1.0rem; text-align: center; margin: 0 0 .35rem; }
+.oracle-col video { width: 100%; aspect-ratio: 1; display: block; border-radius: 6px; background: #111; }
+.rollout-btns { display: flex; gap: .3rem; margin-top: .4rem; justify-content: center; align-items: center; }
+.rollout-btns .rollout-label { font-size: .75rem; margin-right: .15rem; }
+.rollout-btns button {
+  font-size: .75rem; padding: 1px 8px; border: 1px solid #aaa;
+  border-radius: 4px; background: transparent; cursor: pointer; color: inherit;
+}
+.rollout-btns button.active { background: #555; color: #fff; border-color: #555; }
+</style>
+
+<div class="oracle-row">
+
+  <!-- cartpole-swingup -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>cartpole-swingup</code></p>
+    <video id="vid-cartpole" autoplay loop muted playsinline controls></video>
+    <div class="rollout-btns" id="btns-cartpole">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/cartpole-swingup/oracle/rs-cartpole-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+
+  <!-- cup-catch -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>cup-catch</code></p>
+    <video id="vid-cup" autoplay loop muted playsinline controls></video>
+    <div class="rollout-btns" id="btns-cup">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/cup-catch/oracle/rs-cup-catch-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+
+  <!-- finger-spin -->
+  <div class="oracle-col">
+    <p class="oracle-task-name"><code>finger-spin</code></p>
+    <video id="vid-finger" autoplay loop muted playsinline controls></video>
+    <div class="rollout-btns" id="btns-finger">
+      <span class="rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R0.mp4">1</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R1.mp4">2</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R2.mp4">3</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R3.mp4">4</button>
+      <button data-src="assets/RF-DMC/finger-spin/oracle/rs-finger-spin-oracle-R4.mp4">5</button>
+    </div>
+  </div>
+</div>
+<br/>
+<script>
+(function () {
+  [['vid-cartpole','btns-cartpole'], ['vid-cup','btns-cup'], ['vid-finger','btns-finger']].forEach(function(pair) {
+    var vid = document.getElementById(pair[0]);
+    var btns = document.getElementById(pair[1]);
+    if (!vid || !btns) return;
+    var cache = {};
+
+    function load(src, btn) {
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = true; });
+      if (cache[src]) {
+        setBlob(cache[src], btn);
+        return;
+      }
+      fetch(src)
+        .then(function(r) { return r.blob(); })
+        .then(function(blob) {
+          cache[src] = URL.createObjectURL(blob);
+          setBlob(cache[src], btn);
+        })
+        .catch(function() { btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; }); });
+    }
+
+    function setBlob(url, btn) {
+      if (vid._blobUrl && vid._blobUrl !== url) URL.revokeObjectURL(vid._blobUrl);
+      vid._blobUrl = url;
+      vid.src = url;
+      vid.load();
+      vid.play().catch(function(){});
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; });
+      if (btn) { btns.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); }
+    }
+
+    btns.querySelectorAll('button').forEach(function(btn) {
+      btn.addEventListener('click', function() { load(btn.dataset.src, btn); });
+    });
+    load(btns.querySelector('button.active').dataset.src, null);
+  });
+})();
+</script>
+```
+::: {layout-ncol=3}
+
+$\rmJ_\text{oracle} = 881.8 \pm 4.9$
+
+$\rmJ_\text{oracle} = 977.8 \pm 15.7$
+
+$\rmJ_\text{oracle} = 969.9 \pm 11.7$
+
+:::
+
+
+Rollouts of oracle policies on the `RF-DMC` tasks. The performance is reported over 1000 rollouts.
+
+:::
+:::
+
+
+**Rangefinder noise model** We adopt the popular mixture-of-noise model (Probabilistic Robotics, Thrun et al.) to corrupt true range measurements $z^*$, in the range $[z_\text{min}, z_\text{max}] = [0, 10]$ m, with the following noise components:
+
+- **hit** --- measurement noise, $\gN(z^*, \sigma_\text{hit}^2)$, truncated gaussian located at the true range, clipped to $[z_\text{min}, z_\text{max}]$ (weight $c_\text{hit}$)
+- **short** --- interfering obstacles, $\propto \text{Exp}(\lambda_\text{short})$ on $[0, z^*]$ (weight $c_\text{short}$, held at $0$ across grades in our experiments)
+- **max** --- missed detections, $\delta$-spike at $z_\text{max}$ (weight $c_\text{max}$)
+- **rand** --- random noise, uniform over the measured range $[z_\text{min}, z_\text{max}]$ (weight $c_\text{rand}$).
+
+The designer tunes discrete sensor `quality` levels $\in \{\texttt{A}, \dots, \texttt{F}\}$ that set operating specific mixture weights and measurement noise scales $\sigma_\text{hit}$.
+The per-step **sensor cost** is $\big(\text{energy}(\texttt{quality}) + \tfrac12 \log_2 H\big)\cdot n_\text{rays}$, where the per-ray grade energy is obtained from the SNR for the chosen rangefinder noise model, $H$ is the observation history length, and $360 / n_\text{rays}$ is the angular resolution. @fig-rf-dmc-noise presents an interactive visualization of the noise model and sensor costs for the `RF-DMC` sensor configurations.
+
+::: {#fig-rf-dmc-noise .column-page}
+
+::: {#rf-dmc-noise}
+:::
+
+```{=html}
+<script src="assets/RF-DMC/sensor_viz.js"></script>
+<br/>
+```
+
+Interactive visualization of the Rangefinder noise model. **Left:** For the selected sensor `quality` (`A`–`F`) and true range $z^*$; the panel below reports the grade's mixture weights and measurement statistics. **Center:** visualizes the density $p(z \mid z^*)$. **Right:** reports the per-step sensor cost of the configuration.
+
+:::

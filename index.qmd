@@ -24,5 +24,3 @@ The supplementary material is organized as follows:
   + `clutter-nav`
 - [**Best Designs**](designs.qmd)
   <br/>_Outlines the best designs synthesized by LEMCA for each task._
-- [**Performance-Resource Dashboard**](dashboard-PR.qmd)
-  <br/>_An interactive dashboard visualizing LEMCA's design process on the performance-resource plane._

@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - tasks/assets/**
+    - designs/**
 
 website:
   title: "LEMCA"
@@ -10,8 +13,6 @@ website:
         text: Tasks
       - href: designs.qmd
         text: Best Designs
-      - href: dashboard-PR.qmd
-        text: PR-Dashboard
   favicon: favicon.ico
 
 
@@ -20,3 +21,4 @@ format:
     theme: [cosmo, distill.scss]
     css: styles.css
     toc: true
+    include-in-header: _macros.html
