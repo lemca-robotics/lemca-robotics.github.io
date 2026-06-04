@@ -20,4 +20,3 @@ format:
     theme: [cosmo, distill.scss]
     css: styles.css
     toc: true
-
