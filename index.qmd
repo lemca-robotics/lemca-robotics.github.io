@@ -12,17 +12,15 @@ Physical control tasks in the natural world, such as driving or object manipulat
 <a href="/" class="btn btn-primary disabled" role="button">Code</a>
 
 ## Supplementary Material
-The supplementary material is organized as follows:
+The supplementary material is organized as follows, please click on the links below to navigate to the corresponding sections:
 
 - [**Task Description**](tasks/overview.qmd)
-  <br/>_Provides an overview of the following tasks LEMCA is evaluated on._
-  + `point-to-disk`
-  + `RF-DMC`
+  <br/>_Provides an overview of the following tasks LEMCA is evaluated on. The details of the task dynamics, sensor library, and associated costs are provided. See more at [link](tasks/overview.qmd)._
+  + [`point-to-disk`](tasks/overview.qmd#point-to-disk)
+  + [`RF-DMC`](tasks/overview.qmd#rf-dmc)
     * `cartpole-swingup`
     * `cup-catch`
     * `finger-spin`
-  + `clutter-nav`
+  + [`clutter-nav`](tasks/overview.qmd#clutter-nav)
 - [**Best Designs**](designs.qmd)
-  <br/>_Outlines the best designs synthesized by LEMCA for each task._
-- [**Performance-Resource Dashboard**](dashboard-PR.qmd)
-  <br/>_An interactive dashboard visualizing LEMCA's design process on the performance-resource plane._
+  <br/>_This presents an interactive dashboard to via the best mode-switching controller designs synthesized by LEMCA for each task + performance target. The dashboard outlines the source code of the best design along with its performance metrics and rollouts. View the dashboard at [link](designs.qmd)._

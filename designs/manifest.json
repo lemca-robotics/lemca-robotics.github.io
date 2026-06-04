@@ -1,0 +1,414 @@
+{
+  "designs": [
+    {
+      "task": "point-to-disk",
+      "name": "CheapGPS",
+      "target": "200",
+      "py": "designs/point-to-disk/200/CheapGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+        "task_performance": 286.904052734375,
+        "task_performance_std": 95.07926177978516,
+        "resource_cost": 20.07628824329992,
+        "resource_cost_std": 0.712304096689839,
+        "mode_occupancy": [
+          0.08624600219726562,
+          0.016496000289916993,
+          0.897258056640625
+        ],
+        "mode_cost": [
+          0.13143827336018174,
+          0.22085696490513926,
+          0.02805580192917677
+        ]
+      },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/200/CheapGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "point-to-disk",
+      "name": "CostlyGPS",
+      "target": "200",
+      "py": "designs/point-to-disk/200/CostlyGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+        "task_performance": 265.60101318359375,
+        "task_performance_std": 128.25144958496094,
+        "resource_cost": 16.60257020601034,
+        "resource_cost_std": 0.3458042929777372,
+        "mode_occupancy": [
+            0.19296800231933595,
+            0.8070320434570313
+        ],
+        "mode_cost": [
+            0.05436996976694901,
+            0.028144453673281153
+        ]
+      },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/200/CostlyGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "point-to-disk",
+      "name": "CheapGPS",
+      "target": "300",
+      "py": "designs/point-to-disk/300/CheapGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+         "task_performance": 429.7860107421875,
+         "task_performance_std": 10.88679027557373,
+         "resource_cost": 22.288684390880288,
+         "resource_cost_std": 1.0499142524717784,
+         "mode_occupancy": [0.09107200622558594,
+          0.019994001388549804,
+          0.03330800247192383,
+          0.8556260375976562],
+         "mode_cost": [0.11141971167780389,
+          0.15595468725203773,
+          0.2208715219660975,
+          0.02799728341642487]
+      },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/300/CheapGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "point-to-disk",
+      "name": "CostlyGPS",
+      "target": "300",
+      "py": "designs/point-to-disk/300/CostlyGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+         "task_performance": 449.2490539550781,
+         "task_performance_std": 4.3512067794799805,
+         "resource_cost": 16.220947984736203,
+         "resource_cost_std": 0.18319999121389027,
+         "mode_occupancy": [0.10547200775146484, 0.8945280151367188],
+         "mode_cost": [0.07013748731501655, 0.02799728341642487]
+       },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/300/CostlyGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "point-to-disk",
+      "name": "CheapGPS",
+      "target": "450",
+      "py": "designs/point-to-disk/450/CheapGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+        "task_performance": 454.4410095214844,
+        "task_performance_std": 4.045061111450195,
+        "resource_cost": 29.249888231765674,
+        "resource_cost_std": 1.295235233247647,
+        "mode_occupancy": [0.10479600524902344, 0.8952040405273437],
+        "mode_cost": [0.31909380003091653, 0.027993641433743208]
+      },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/450/CheapGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "point-to-disk",
+      "name": "CostlyGPS",
+      "target": "450",
+      "py": "designs/point-to-disk/450/CostlyGPS.py",
+      "caption": "Visualizes rollouts from different initializations on the unit circle. The agents' positions are represented by a dot, with its color corresponding to the active mode. The inset figure provides a zoomed in view of the target disk region (light green).",
+      "metrics": {
+         "task_performance": 454.4410095214844,
+         "task_performance_std": 4.045061111450195,
+         "resource_cost": 17.11128462351949,
+         "resource_cost_std": 0.2644689483078172,
+         "mode_occupancy": [0.10479600524902344, 0.8952040405273437],
+         "mode_cost": [0.0874322289738595, 0.027993641433743208]
+      },
+      "rollouts": [
+        {
+          "label": "1",
+          "src": "designs/point-to-disk/450/CostlyGPS.mp4"
+        }
+      ],
+      "J_oracle": 456.2250671386719,
+      "H": 500
+    },
+    {
+      "task": "RF-DMC (cartpole-swingup)",
+      "name": "",
+      "target": "650",
+      "py": "designs/RF-DMC/cartpole-swingup/650/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span> and 1: <span style='color: #5ba85b; font-weight: bold'>green</span>).",
+      "metrics": {
+         "task_performance": 753.1080932617188,
+         "task_performance_std": 96.82278442382812,
+         "resource_cost": 14705.522920898438,
+         "resource_cost_std": 1181.3907228484072,
+         "mode_occupancy": [0.3633690185546875, 0.6366310424804688],
+         "mode_cost": [19.740000000000002, 11.832]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/RF-DMC/cartpole-swingup/650/rs-cartpole-59fa131338c0bd0195d3579628de29ca831bf6b45764f4d446b3060964d6b4de.G9_2-R0.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/RF-DMC/cartpole-swingup/650/rs-cartpole-59fa131338c0bd0195d3579628de29ca831bf6b45764f4d446b3060964d6b4de.G9_2-R1.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/RF-DMC/cartpole-swingup/650/rs-cartpole-59fa131338c0bd0195d3579628de29ca831bf6b45764f4d446b3060964d6b4de.G9_2-R2.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/RF-DMC/cartpole-swingup/650/rs-cartpole-59fa131338c0bd0195d3579628de29ca831bf6b45764f4d446b3060964d6b4de.G9_2-R3.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/RF-DMC/cartpole-swingup/650/rs-cartpole-59fa131338c0bd0195d3579628de29ca831bf6b45764f4d446b3060964d6b4de.G9_2-R4.mp4"
+        }
+      ],
+      "J_oracle": 881.7826538085938,
+      "H": 1000
+    },
+    {
+      "task": "RF-DMC (cup-catch)",
+      "name": "",
+      "target": "700",
+      "py": "designs/RF-DMC/cup-catch/700/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span>, 1: <span style='color: #5ba85b; font-weight: bold'>green</span>, and 2: <span style='color: #e0a458; font-weight: bold'>orange</span>).",
+      "metrics": {
+        "task_performance": 939.6331176757812,
+        "task_performance_std": 79.51541137695312,
+        "resource_cost": 6709.5323272933965,
+        "resource_cost_std": 6820.870601235517,
+        "mode_occupancy": [
+         0.03106700134277344,
+         0.028676000595092774,
+         0.9402570190429688],
+        "mode_cost": [34.46, 196.644, 0.0]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/RF-DMC/cup-catch/700/rs-cup-catch-f316da3c6edbd5f21e50c1d78e443dae4fa6fe9fd32966818b95fb354c455b3f.G7_1-R0.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/RF-DMC/cup-catch/700/rs-cup-catch-f316da3c6edbd5f21e50c1d78e443dae4fa6fe9fd32966818b95fb354c455b3f.G7_1-R1.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/RF-DMC/cup-catch/700/rs-cup-catch-f316da3c6edbd5f21e50c1d78e443dae4fa6fe9fd32966818b95fb354c455b3f.G7_1-R3.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/RF-DMC/cup-catch/700/rs-cup-catch-f316da3c6edbd5f21e50c1d78e443dae4fa6fe9fd32966818b95fb354c455b3f.G7_1-R5.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/RF-DMC/cup-catch/700/rs-cup-catch-f316da3c6edbd5f21e50c1d78e443dae4fa6fe9fd32966818b95fb354c455b3f.G7_1-R6.mp4"
+        }
+      ],
+      "J_oracle": 977.8341064453125,
+      "H": 1000
+    },
+    {
+      "task": "RF-DMC (finger-spin)",
+      "name": "",
+      "target": "750",
+      "py": "designs/RF-DMC/finger-spin/750/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span> and 1: <span style='color: #5ba85b; font-weight: bold'>green</span>).",
+      "metrics": {
+         "task_performance": 781.0360107421875,
+         "task_performance_std": 41.70185470581055,
+         "resource_cost": 35295.679547271175,
+         "resource_cost_std": 1030.0392929821116,
+         "mode_occupancy": [0.50127001953125, 0.49873001098632813],
+         "mode_cost": [46.979850002884625, 23.552]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/RF-DMC/finger-spin/750/rs-finger-spin-481a5cda69e6e7175813fcb1a19721af902088dd1028675f44b598781fd98548.G7_1-R0.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/RF-DMC/finger-spin/750/rs-finger-spin-481a5cda69e6e7175813fcb1a19721af902088dd1028675f44b598781fd98548.G7_1-R1.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/RF-DMC/finger-spin/750/rs-finger-spin-481a5cda69e6e7175813fcb1a19721af902088dd1028675f44b598781fd98548.G7_1-R2.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/RF-DMC/finger-spin/750/rs-finger-spin-481a5cda69e6e7175813fcb1a19721af902088dd1028675f44b598781fd98548.G7_1-R3.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/RF-DMC/finger-spin/750/rs-finger-spin-481a5cda69e6e7175813fcb1a19721af902088dd1028675f44b598781fd98548.G7_1-R4.mp4"
+        }
+      ],
+      "J_oracle": 969.8981323242188,
+      "H": 1000
+    },
+    {
+      "task": "clutter-nav",
+      "name": "",
+      "target": [0.8, 0.033],
+      "target_names": ["success_rate", "collision_rate(90p)"],
+      "target_op": ["≥", "≤"],
+      "py": "designs/clutter-nav/30/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span>, 1: <span style='color: #5ba85b; font-weight: bold'>green</span>, and 2: <span style='color: #e0a458; font-weight: bold'>orange</span>).",
+      "metrics": {
+         "task_performance": [0.909, 0.0323556971514243],
+         "task_performance_std": null,
+         "resource_cost": 8.8438782359859,
+         "resource_cost_std": 1.4819872943252197,
+         "success_rate": 0.909,
+         "collisions_per_step_90p": 0.0323556971514243,
+         "mode_occupancy": [
+            0.3261343076532759,
+            0.30195910942884685,
+            0.37190658291787726
+         ],
+         "mode_cost": [1.2833333333333334, 4.735, 18.81]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/clutter-nav/30/44b510f14eeaee9d58c539900cb270ab9ef8e8b055153106a40d2f586ffb2db6.G20_0-S492.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/clutter-nav/30/44b510f14eeaee9d58c539900cb270ab9ef8e8b055153106a40d2f586ffb2db6.G20_0-S493.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/clutter-nav/30/44b510f14eeaee9d58c539900cb270ab9ef8e8b055153106a40d2f586ffb2db6.G20_0-S6.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/clutter-nav/30/44b510f14eeaee9d58c539900cb270ab9ef8e8b055153106a40d2f586ffb2db6.G20_0-S802.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/clutter-nav/30/44b510f14eeaee9d58c539900cb270ab9ef8e8b055153106a40d2f586ffb2db6.G20_0-S815.mp4"
+        }
+      ],
+      "H": 500
+    },
+    {
+      "task": "clutter-nav",
+      "name": "",
+      "target": [0.8, 0.025],
+      "target_names": ["success_rate", "collision_rate(90p)"],
+      "target_op": ["≥", "≤"],
+      "py": "designs/clutter-nav/40/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span> and 1: <span style='color: #5ba85b; font-weight: bold'>green</span>).",
+      "metrics": {
+         "task_performance": [0.976, 0.024030555555555562],
+         "task_performance_std": null,
+         "resource_cost": 16.659043993860692,
+         "resource_cost_std": 2.2158410702964173,
+         "success_rate": 0.976,
+         "collisions_per_step_90p": 0.024030555555555562,
+         "mode_occupancy": [0.4478498530193248, 0.5521501469806752],
+         "mode_cost": [7.916666666666667, 23.75]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/clutter-nav/40/7af47d14cc1e04f9abe9ebd48d0ef5cce92c9a9e8376d1d590fc6338ae2c4ffa.G18_1-S492.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/clutter-nav/40/7af47d14cc1e04f9abe9ebd48d0ef5cce92c9a9e8376d1d590fc6338ae2c4ffa.G18_1-S493.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/clutter-nav/40/7af47d14cc1e04f9abe9ebd48d0ef5cce92c9a9e8376d1d590fc6338ae2c4ffa.G18_1-S6.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/clutter-nav/40/7af47d14cc1e04f9abe9ebd48d0ef5cce92c9a9e8376d1d590fc6338ae2c4ffa.G18_1-S802.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/clutter-nav/40/7af47d14cc1e04f9abe9ebd48d0ef5cce92c9a9e8376d1d590fc6338ae2c4ffa.G18_1-S815.mp4"
+        }
+      ],
+      "H": 500
+    },
+    {
+      "task": "clutter-nav",
+      "name": "",
+      "target": [0.8, 0.02],
+      "target_names": ["success_rate", "collision_rate(90p)"],
+      "target_op": ["≥", "≤"],
+      "py": "designs/clutter-nav/50/design.py",
+      "caption": "Rollouts and the mode over time plot (top). The slider indicates the active mode (0: <span style='color: #2e86ab; font-weight: bold'>blue</span>, 1: <span style='color: #5ba85b; font-weight: bold'>green</span>, and 2: <span style='color: #e0a458; font-weight: bold'>orange</span>).",
+      "metrics": {
+         "task_performance": [0.916, 0.016],
+         "task_performance_std": null,
+         "resource_cost": 58.5669960423187,
+         "resource_cost_std": 13.49443805176556,
+         "success_rate": 0.916,
+         "collisions_per_step_90p": 0.016,
+         "mode_occupancy": [0.3594301392088454,
+          0.09507379255362405,
+          0.5454960682375305],
+         "mode_cost": [7.25, 30.625, 97.25]
+      },
+      "rollouts": [
+        {
+            "label": "1",
+            "src": "designs/clutter-nav/50/c6fb36be322bda5cced12b27440996fafdf194720d0ebdd5bae76f6e73aaf17d.G16_2-S492.mp4"
+        },
+        {
+            "label": "2",
+            "src": "designs/clutter-nav/50/c6fb36be322bda5cced12b27440996fafdf194720d0ebdd5bae76f6e73aaf17d.G16_2-S493.mp4"
+        },
+        {
+            "label": "3",
+            "src": "designs/clutter-nav/50/c6fb36be322bda5cced12b27440996fafdf194720d0ebdd5bae76f6e73aaf17d.G16_2-S6.mp4"
+        },
+        {
+            "label": "4",
+            "src": "designs/clutter-nav/50/c6fb36be322bda5cced12b27440996fafdf194720d0ebdd5bae76f6e73aaf17d.G16_2-S802.mp4"
+        },
+        {
+            "label": "5",
+            "src": "designs/clutter-nav/50/c6fb36be322bda5cced12b27440996fafdf194720d0ebdd5bae76f6e73aaf17d.G16_2-S815.mp4"
+        }
+      ],
+      "H": 500
+    }
+  ]
+}

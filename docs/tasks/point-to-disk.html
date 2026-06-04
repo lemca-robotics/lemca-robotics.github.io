@@ -67,6 +67,201 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+(function () {
+  window.MathJax = window.MathJax || {};
+  window.MathJax.tex = window.MathJax.tex || {};
+  window.MathJax.tex.macros = Object.assign(window.MathJax.tex.macros || {}, {
+    // floor / ceil
+    ceil:  ['\\lceil #1 \\rceil', 1],
+    floor: ['\\lfloor #1 \\rfloor', 1],
+
+    // scalar shorthands
+    eps:  '{\\epsilon}',
+    reta: '{\\textnormal{\\eta}}',
+    ra: '{\\textnormal{a}}', rb: '{\\textnormal{b}}', rc: '{\\textnormal{c}}',
+    rd: '{\\textnormal{d}}', re: '{\\textnormal{e}}', rf: '{\\textnormal{f}}',
+    rg: '{\\textnormal{g}}', rh: '{\\textnormal{h}}', ri: '{\\textnormal{i}}',
+    rj: '{\\textnormal{j}}', rk: '{\\textnormal{k}}', rl: '{\\textnormal{l}}',
+    rn: '{\\textnormal{n}}', ro: '{\\textnormal{o}}', rp: '{\\textnormal{p}}',
+    rq: '{\\textnormal{q}}', rr: '{\\textnormal{r}}', rs: '{\\textnormal{s}}',
+    rt: '{\\textnormal{t}}', ru: '{\\textnormal{u}}', rv: '{\\textnormal{v}}',
+    rw: '{\\textnormal{w}}', rx: '{\\textnormal{x}}', ry: '{\\textnormal{y}}',
+    rz: '{\\textnormal{z}}',
+
+    // random vectors
+    rvepsilon: '{\\mathbf{\\epsilon}}', rvtheta: '{\\mathbf{\\theta}}',
+    rva: '{\\mathbf{a}}', rvb: '{\\mathbf{b}}', rvc: '{\\mathbf{c}}',
+    rvd: '{\\mathbf{d}}', rve: '{\\mathbf{e}}', rvf: '{\\mathbf{f}}',
+    rvg: '{\\mathbf{g}}', rvh: '{\\mathbf{h}}', rvj: '{\\mathbf{j}}',
+    rvk: '{\\mathbf{k}}', rvl: '{\\mathbf{l}}', rvm: '{\\mathbf{m}}',
+    rvn: '{\\mathbf{n}}', rvo: '{\\mathbf{o}}', rvp: '{\\mathbf{p}}',
+    rvq: '{\\mathbf{q}}', rvr: '{\\mathbf{r}}', rvs: '{\\mathbf{s}}',
+    rvt: '{\\mathbf{t}}', rvu: '{\\mathbf{u}}', rvv: '{\\mathbf{v}}',
+    rvw: '{\\mathbf{w}}', rvx: '{\\mathbf{x}}', rvy: '{\\mathbf{y}}',
+    rvz: '{\\mathbf{z}}',
+
+    // elements of random vectors
+    erva: '{\\textnormal{a}}', ervb: '{\\textnormal{b}}', ervc: '{\\textnormal{c}}',
+    ervd: '{\\textnormal{d}}', erve: '{\\textnormal{e}}', ervf: '{\\textnormal{f}}',
+    ervg: '{\\textnormal{g}}', ervh: '{\\textnormal{h}}', ervi: '{\\textnormal{i}}',
+    ervj: '{\\textnormal{j}}', ervk: '{\\textnormal{k}}', ervl: '{\\textnormal{l}}',
+    ervm: '{\\textnormal{m}}', ervn: '{\\textnormal{n}}', ervo: '{\\textnormal{o}}',
+    ervp: '{\\textnormal{p}}', ervq: '{\\textnormal{q}}', ervr: '{\\textnormal{r}}',
+    ervs: '{\\textnormal{s}}', ervt: '{\\textnormal{t}}', ervu: '{\\textnormal{u}}',
+    ervv: '{\\textnormal{v}}', ervw: '{\\textnormal{w}}', ervx: '{\\textnormal{x}}',
+    ervy: '{\\textnormal{y}}', ervz: '{\\textnormal{z}}',
+
+    // random matrices (bold)
+    rmA: '{\\mathbf{A}}', rmB: '{\\mathbf{B}}', rmC: '{\\mathbf{C}}',
+    rmD: '{\\mathbf{D}}', rmE: '{\\mathbf{E}}', rmF: '{\\mathbf{F}}',
+    rmG: '{\\mathbf{G}}', rmH: '{\\mathbf{H}}', rmI: '{\\mathbf{I}}',
+    rmK: '{\\mathbf{K}}', rmL: '{\\mathbf{L}}', rmM: '{\\mathbf{M}}',
+    rmN: '{\\mathbf{N}}', rmO: '{\\mathbf{O}}', rmP: '{\\mathbf{P}}',
+    rmQ: '{\\mathbf{Q}}', rmS: '{\\mathbf{S}}', rmT: '{\\mathbf{T}}',
+    rmU: '{\\mathbf{U}}', rmV: '{\\mathbf{V}}', rmW: '{\\mathbf{W}}',
+    rmX: '{\\mathbf{X}}', rmY: '{\\mathbf{Y}}', rmZ: '{\\mathbf{Z}}',
+
+    // elements of random matrices
+    ermA: '{\\textnormal{A}}', ermB: '{\\textnormal{B}}', ermC: '{\\textnormal{C}}',
+    ermD: '{\\textnormal{D}}', ermE: '{\\textnormal{E}}', ermF: '{\\textnormal{F}}',
+    ermG: '{\\textnormal{G}}', ermH: '{\\textnormal{H}}', ermI: '{\\textnormal{I}}',
+    ermJ: '{\\textnormal{J}}', ermK: '{\\textnormal{K}}', ermL: '{\\textnormal{L}}',
+    ermM: '{\\textnormal{M}}', ermN: '{\\textnormal{N}}', ermO: '{\\textnormal{O}}',
+    ermP: '{\\textnormal{P}}', ermQ: '{\\textnormal{Q}}', ermR: '{\\textnormal{R}}',
+    ermS: '{\\textnormal{S}}', ermT: '{\\textnormal{T}}', ermU: '{\\textnormal{U}}',
+    ermV: '{\\textnormal{V}}', ermW: '{\\textnormal{W}}', ermX: '{\\textnormal{X}}',
+    ermY: '{\\textnormal{Y}}', ermZ: '{\\textnormal{Z}}',
+
+    // vectors (bold)
+    vzero: '{\\mathbf{0}}', vone: '{\\mathbf{1}}',
+    vmu: '{\\boldsymbol{\\mu}}', vtheta: '{\\boldsymbol{\\theta}}',
+    va: '{\\mathbf{a}}', vb: '{\\mathbf{b}}', vc: '{\\mathbf{c}}',
+    vd: '{\\mathbf{d}}', ve: '{\\mathbf{e}}', vf: '{\\mathbf{f}}',
+    vg: '{\\mathbf{g}}', vh: '{\\mathbf{h}}', vi: '{\\mathbf{i}}',
+    vj: '{\\mathbf{j}}', vk: '{\\mathbf{k}}', vl: '{\\mathbf{l}}',
+    vm: '{\\mathbf{m}}', vn: '{\\mathbf{n}}', vo: '{\\mathbf{o}}',
+    vp: '{\\mathbf{p}}', vq: '{\\mathbf{q}}', vr: '{\\mathbf{r}}',
+    vs: '{\\mathbf{s}}', vt: '{\\mathbf{t}}', vu: '{\\mathbf{u}}',
+    vv: '{\\mathbf{v}}', vw: '{\\mathbf{w}}', vx: '{\\mathbf{x}}',
+    vy: '{\\mathbf{y}}', vz: '{\\mathbf{z}}',
+
+    // elements of vectors
+    evalpha: '{\\alpha}',   evbeta: '{\\beta}',    evepsilon: '{\\epsilon}',
+    evlambda: '{\\lambda}', evomega: '{\\omega}',  evmu: '{\\mu}',
+    evpsi: '{\\psi}',       evsigma: '{\\sigma}',  evtheta: '{\\theta}',
+    eva: '{a}', evb: '{b}', evc: '{c}', evd: '{d}', eve: '{e}',
+    evf: '{f}', evg: '{g}', evh: '{h}', evi: '{i}', evj: '{j}',
+    evk: '{k}', evl: '{l}', evm: '{m}', evn: '{n}', evo: '{o}',
+    evp: '{p}', evq: '{q}', evr: '{r}', evs: '{s}', evt: '{t}',
+    evu: '{u}', evv: '{v}', evw: '{w}', evx: '{x}', evy: '{y}',
+    evz: '{z}',
+
+    // matrices
+    mA: '{\\mathbf{A}}', mB: '{\\mathbf{B}}', mC: '{\\mathbf{C}}',
+    mD: '{\\mathbf{D}}', mE: '{\\mathbf{E}}', mF: '{\\mathbf{F}}',
+    mG: '{\\mathbf{G}}', mH: '{\\mathbf{H}}', mI: '{\\mathbf{I}}',
+    mJ: '{\\mathbf{J}}', mK: '{\\mathbf{K}}', mL: '{\\mathbf{L}}',
+    mM: '{\\mathbf{M}}', mN: '{\\mathbf{N}}', mO: '{\\mathbf{O}}',
+    mP: '{\\mathbf{P}}', mQ: '{\\mathbf{Q}}', mR: '{\\mathbf{R}}',
+    mS: '{\\mathbf{S}}', mT: '{\\mathbf{T}}', mU: '{\\mathbf{U}}',
+    mV: '{\\mathbf{V}}', mW: '{\\mathbf{W}}', mX: '{\\mathbf{X}}',
+    mY: '{\\mathbf{Y}}', mZ: '{\\mathbf{Z}}',
+    mBeta: '{\\boldsymbol{\\beta}}', mPhi: '{\\boldsymbol{\\Phi}}',
+    mLambda: '{\\boldsymbol{\\Lambda}}', mSigma: '{\\boldsymbol{\\Sigma}}',
+
+    // tensors (mathsfit not available in MathJax; fall back to mathbf)
+    tens:  ['\\mathbf{#1}', 1],
+    etens: ['\\mathit{#1}', 1],
+    tA: '{\\mathbf{A}}', tB: '{\\mathbf{B}}', tC: '{\\mathbf{C}}',
+    tD: '{\\mathbf{D}}', tE: '{\\mathbf{E}}', tF: '{\\mathbf{F}}',
+    tG: '{\\mathbf{G}}', tH: '{\\mathbf{H}}', tI: '{\\mathbf{I}}',
+    tJ: '{\\mathbf{J}}', tK: '{\\mathbf{K}}', tL: '{\\mathbf{L}}',
+    tM: '{\\mathbf{M}}', tN: '{\\mathbf{N}}', tO: '{\\mathbf{O}}',
+    tP: '{\\mathbf{P}}', tQ: '{\\mathbf{Q}}', tR: '{\\mathbf{R}}',
+    tS: '{\\mathbf{S}}', tT: '{\\mathbf{T}}', tU: '{\\mathbf{U}}',
+    tV: '{\\mathbf{V}}', tW: '{\\mathbf{W}}', tX: '{\\mathbf{X}}',
+    tY: '{\\mathbf{Y}}', tZ: '{\\mathbf{Z}}',
+
+    // graphs / sets
+    gA: '{\\mathcal{A}}', gB: '{\\mathcal{B}}', gC: '{\\mathcal{C}}',
+    gD: '{\\mathcal{D}}', gE: '{\\mathcal{E}}', gF: '{\\mathcal{F}}',
+    gG: '{\\mathcal{G}}', gH: '{\\mathcal{H}}', gI: '{\\mathcal{I}}',
+    gJ: '{\\mathcal{J}}', gK: '{\\mathcal{K}}', gL: '{\\mathcal{L}}',
+    gM: '{\\mathcal{M}}', gN: '{\\mathcal{N}}', gO: '{\\mathcal{O}}',
+    gP: '{\\mathcal{P}}', gQ: '{\\mathcal{Q}}', gR: '{\\mathcal{R}}',
+    gS: '{\\mathcal{S}}', gT: '{\\mathcal{T}}', gU: '{\\mathcal{U}}',
+    gV: '{\\mathcal{V}}', gW: '{\\mathcal{W}}', gX: '{\\mathcal{X}}',
+    gY: '{\\mathcal{Y}}', gZ: '{\\mathcal{Z}}',
+
+    sA: '{\\mathbb{A}}', sB: '{\\mathbb{B}}', sC: '{\\mathbb{C}}',
+    sD: '{\\mathbb{D}}', sF: '{\\mathbb{F}}', sG: '{\\mathbb{G}}',
+    sH: '{\\mathbb{H}}', sI: '{\\mathbb{I}}', sJ: '{\\mathbb{J}}',
+    sK: '{\\mathbb{K}}', sL: '{\\mathbb{L}}', sM: '{\\mathbb{M}}',
+    sN: '{\\mathbb{N}}', sO: '{\\mathbb{O}}', sP: '{\\mathbb{P}}',
+    sQ: '{\\mathbb{Q}}', sR: '{\\mathbb{R}}', sS: '{\\mathbb{S}}',
+    sT: '{\\mathbb{T}}', sU: '{\\mathbb{U}}', sV: '{\\mathbb{V}}',
+    sW: '{\\mathbb{W}}', sX: '{\\mathbb{X}}', sY: '{\\mathbb{Y}}',
+    sZ: '{\\mathbb{Z}}',
+
+    // matrix entries
+    emLambda: '{\\Lambda}', emSigma: '{\\Sigma}',
+    emA: '{A}', emB: '{B}', emC: '{C}', emD: '{D}', emE: '{E}',
+    emF: '{F}', emG: '{G}', emH: '{H}', emI: '{I}', emJ: '{J}',
+    emK: '{K}', emL: '{L}', emM: '{M}', emN: '{N}', emO: '{O}',
+    emP: '{P}', emQ: '{Q}', emR: '{R}', emS: '{S}', emT: '{T}',
+    emU: '{U}', emV: '{V}', emW: '{W}', emX: '{X}', emY: '{Y}',
+    emZ: '{Z}',
+
+    // tensor entries
+    etLambda: '{\\mathit{\\Lambda}}',
+    etA: '{\\mathit{A}}', etB: '{\\mathit{B}}', etC: '{\\mathit{C}}',
+    etD: '{\\mathit{D}}', etE: '{\\mathit{E}}', etF: '{\\mathit{F}}',
+    etG: '{\\mathit{G}}', etH: '{\\mathit{H}}', etI: '{\\mathit{I}}',
+    etJ: '{\\mathit{J}}', etK: '{\\mathit{K}}', etL: '{\\mathit{L}}',
+    etM: '{\\mathit{M}}', etN: '{\\mathit{N}}', etO: '{\\mathit{O}}',
+    etP: '{\\mathit{P}}', etQ: '{\\mathit{Q}}', etR: '{\\mathit{R}}',
+    etS: '{\\mathit{S}}', etT: '{\\mathit{T}}', etU: '{\\mathit{U}}',
+    etV: '{\\mathit{V}}', etW: '{\\mathit{W}}', etX: '{\\mathit{X}}',
+    etY: '{\\mathit{Y}}', etZ: '{\\mathit{Z}}',
+
+    // standard operators and shorthands
+    laplace:       '\\mathrm{Laplace}',
+    E:             '\\mathbb{E}',
+    Ls:            '\\mathcal{L}',
+    R:             '\\mathbb{R}',
+    emp:           '\\tilde{p}',
+    lr:            '\\alpha',
+    reg:           '\\lambda',
+    rect:          '\\mathrm{rectifier}',
+    softmax:       '\\mathrm{softmax}',
+    sigmoid:       '\\sigma',
+    softplus:      '\\zeta',
+    KL:            'D_{\\mathrm{KL}}',
+    TV:            '\\delta_{\\mathrm{TV}}',
+    Var:           '\\mathrm{Var}',
+    standarderror: '\\mathrm{SE}',
+    Cov:           '\\mathrm{Cov}',
+    normlzero:     'L^0',
+    normlone:      'L^1',
+    normltwo:      'L^2',
+    normlp:        'L^p',
+    normmax:       'L^{\\infty}',
+    parents:       '\\mathrm{Pa}',
+    argmax:        '\\operatorname*{arg\\,max}',
+    argmin:        '\\operatorname*{arg\\,min}',
+    sign:          '\\operatorname{sign}',
+    Tr:            '\\operatorname{Tr}',
+    ab:            '\\allowbreak',
+    Ind:           ['\\mathbb{1}_{\\left[#1\\right]}', 1],
+
+    // custom overrides (rmR / rmJ as roman, not bold)
+    rmR: '\\mathrm{R}',
+    rmJ: '\\mathrm{J}',
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -126,10 +321,6 @@ window.Quarto = {
     <a class="nav-link" href="../designs.html"> 
 <span class="menu-text">Best Designs</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../dashboard-PR.html"> 
-<span class="menu-text">PR-Dashboard</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -141,8 +332,14 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#point-to-disk" id="toc-point-to-disk" class="nav-link active" data-scroll-target="#point-to-disk"><code>point-to-disk</code></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -150,6 +347,8 @@ window.Quarto = {
 
 
 
+<section id="point-to-disk" class="level1 page-columns page-full">
+<h1><code>point-to-disk</code></h1>
 <p>A velocity-controlled point-mass with state <span class="math inline">\(\rvx\)</span> (cartesian position) must be driven into a target disk of radius <span class="math inline">\(r^* = 0.01\)</span> m at the origin and held there. Given a velocity command <span class="math inline">\(\rvu\)</span>, the system evolves as <span class="math inline">\(\dot{\rvx} = \rvv\)</span> with <span class="math inline">\(\rvv \sim B_\epsilon(\rvu) := \{ \rvv : ||\rvv - \rvu||_2 \leq \eps ||\rvu||_2 \}\)</span> (<span class="math inline">\(\eps = 0.25\)</span> in our experiments). The actuation noise grows with the commanded speed, so slowing down (<span class="math inline">\(\rvu \to \mathbf{0}\)</span>) allows the controller to suppress actuation noise. The controller, operating at 50 Hz, is scored by its dwell time inside the target for rollouts of length <span class="math inline">\(H = 500\)</span> steps (10 s) from states on the unit circle: <span class="math display">\[\rmJ(\pi) = \E_{\pi,\,\{\rvx_0 : ||\rvx_0||_2 = 1\}}\left[ \sum_{t=0}^H \Ind{||\rvx_t||_2 &lt; r^*} \right]\]</span></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -170,7 +369,7 @@ Figure&nbsp;1: Quiver plot of oracle policy on <code>point-to-disk</code> task.
 </figcaption>
 </figure>
 </div>
-<p><strong>Sensors</strong> The designer can equip the various controller modes with the following sensor types. Each sensor reveals a different slice of the robot’s position <span class="math inline">\(\rvx\)</span>, as illustrated in <a href="#fig-p2d-sensors" class="quarto-xref">Figure&nbsp;2</a> .</p>
+<p><strong>Sensors</strong> The designer can equip the various controller modes with the following sensor types. Each sensor reveals a different slice of the robot’s position <span class="math inline">\(\rvx\)</span>, as illustrated in <a href="#fig-p2d-sensors" class="quarto-xref">Figure&nbsp;2</a>.</p>
 <ul>
 <li><p><code>Cartesian</code> (<code>GPS</code>): noisy position <span class="math inline">\(\rvx + \gN(0, \sigma_\text{xy}^2 \mI_2)\)</span>, with <span class="math inline">\(\sigma_\text{xy} \in \{0,\,10^{-2},\,5{\cdot}10^{-2},\,10^{-1},\,5{\cdot}10^{-1}\}\)</span>.</p></li>
 <li><p><code>Radial</code> &amp; <code>Sector</code> (<code>RadialSector</code>): a discretized polar reading returning the active sector among <span class="math inline">\(s \in [1,360]\)</span> equiangular sectors (optionally offset by <span class="math inline">\(\phi\)</span> radians) and the active radial band among <span class="math inline">\(\text{len}(\rvd){+}1\)</span> bands defined by increasing distance thresholds <span class="math inline">\(\rvd = (d_1, \dots) \le 1\)</span>.</p>
@@ -182,6 +381,7 @@ Figure&nbsp;1: Quiver plot of oracle policy on <code>point-to-disk</code> task.
 </ul></li>
 </ul></li>
 </ul>
+<p><strong>Mode Transition Observation</strong> The mode transitions are based on the robot’s position vector <span class="math inline">\(\rvx\)</span>, which corresponds to the Markov state in this task.</p>
 <p>The designer’s goal is to meet a performance target <span class="math inline">\(\rmJ_\text{target}\)</span> while minimizing the sensing cost incurred.</p>
 <div id="fig-p2d-sensors" class="column-page quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -198,6 +398,7 @@ Figure&nbsp;2: Interactive visualization of sensors for the <code>point-to-disk<
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

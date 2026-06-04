@@ -1,0 +1,119 @@
+---
+include-in-header:
+  - text: '<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>'
+---
+# `clutter-nav`
+
+A disk-shaped robot of radius $0.5$ m with unicycle (differential-drive) dynamics must reach a goal while avoiding obstacles in a cluttered $[-15, 15]^2$ m plane.
+At each reset, $n_\text{static} \in [5, 20]$ static and $n_\text{dynamic} \in [0, 15]$ dynamic disc obstacles (radii $[0.3, 2.0]$ m) are spawned at random, and a goal is sampled $10$–$15$ m away.
+The ego state is $\rvx = (x, y, \theta)$ and the action $\rvu = (v, \omega)$ commands forward velocity $v \in [0, 5]$ m/s and turn rate $\omega \in [-3, 3]$ rad/s; dynamics integrate at $dt = 0.05$ s (20 Hz) with command-scaled actuation noise.
+Dynamic obstacles follow their own goal-seeking + repulsion policy toward periodically resampled waypoints.
+Each mode jointly configures the Radar sensor and an MPPI planner that acts under certainty equivalence — treating the noisy detections as ground truth state.
+
+**Radar sensor** The agent perceives the world through a radar-like sensor that reports detected obstacles in the ego-centric frame, each detection is a tuple $(\evr, \evtheta, \evs, \evv)$ — range, bearing (relative to heading), obstacle size, and radial velocity. Only obstacles within the specified range (under  `max_range`) and field of view ($|\evtheta| \le \texttt{fov}/2$) are registered. These detections are subject to noise as outlined below:
+
+- **Detection probability** The probability of detecting the obstacle drops with the distance via the SNR proxy $P(\evr) = (R_0 / \evr)^4$, as $p_\text{detect} = p_0^{\,1/(1+P)}$, which provides reliable detection for $r \ll R_0$ but decays to $p_0 = 10^{-5}$ as the range increases.
+- **Occlusion**: Detections respect visual occlusions. The ego-centeric detections are quantized into $1^\circ$ bins and the nearest obstacle in each bin is the only obstacle registered.
+- **Range-scaled Noise** Noise scales with the distance across channels (range, size, radial velocity) as $\sigma_*(\evr) = \hat\sigma_*\, \evr^2 / R_0$, with fixed base scales $\hat\sigma_r = 0.2$ m, $\hat\sigma_\text{az} = 0.05$ rad, $\hat\sigma_\text{sz} = 0.08$ m, $\hat\sigma_v = 0.3$ m/s.
+- **Spurious Detections**: Spurious detections are registered at $\text{Poisson}(1)$ per scan, these are uniform over the sensor's coverage.
+
+Of the various knobs, the designer controls only $(R_0, \texttt{max\_range}, \texttt{fov})$ parameters of the sensor — larger values give cleaner, longer-range, wider coverage at higher cost. @fig-cn-sensors presents an interactive visualization of the Radar sensor's noise characteristics. @fig-cn-rollout visualizes rollouts of a maxed-out sensor and planner configuration MPPI controller.
+
+::: {#fig-cn-sensors .column-page}
+
+::: {#clutter-nav-sensors}
+:::
+
+```{=html}
+<script src="assets/clutter-nav/sensor_viz.js"></script>
+```
+
+Interactive Radar sensor visualization for the `clutter-nav` task. **Left:** a randomly sampled world scene — the ego robot (<span style="color:#2E86AB">teal</span>, tick = heading) with its field of view and range disk, static obstacles (<span style="color:#9AA1A8">gray</span>), dynamic obstacles (<span style="color:#E07B5F">terracotta</span>, with velocity arrows), and the goal (<span style="color:#1B4965">navy</span> dashed). **Right:** the instantaneous radar observation in the ego-centric frame, where each detection is colored by the radial velocity and scaled by measured obstacle size; <span style="color:#111">dashed</span> markers are false positives.
+<!-- Detected obstacles are linked back to the scene by faint <span style="color:#1a5c1a">green</span> rays.  -->
+Click *Sample scene* to sample a new configuration, or *Sample observation* to resample a (stochastic) radar scan on the current scene.
+The control panel exposes the three designer-controlled knobs $(R_0, \texttt{max\_range}, \texttt{fov})$ and reports the resulting per-step **sensor cost** — the energy term $w_s(R_0/R_\text{ref})^2$ plus the coverage term $w_c\,\tfrac12\,\texttt{max\_range}^2\,\texttt{fov}/A_\text{ref}$ — using the weights $(w_s, w_c) = (1.0, 0.5)$.
+
+:::
+
+::: {#fig-cn-rollout .column-page}
+
+
+```{=html}
+<style>
+.nav-oracle-row { display: flex; gap: .75rem; }
+.nav-oracle-col { flex: 1; min-width: 0; }
+.nav-oracle-task-name { font-family: monospace; font-size: 1.0rem; text-align: center; margin: 0 0 .35rem; }
+.nav-oracle-col video { width: 100%; display: block; border-radius: 6px; background: #111; }
+.nav-rollout-btns { display: flex; gap: .3rem; margin-top: .4rem; justify-content: center; align-items: center; }
+.nav-rollout-btns .rollout-label { font-size: .75rem; margin-right: .15rem; }
+.nav-rollout-btns button {
+  font-size: .75rem; padding: 1px 8px; border: 1px solid #aaa;
+  border-radius: 4px; background: transparent; cursor: pointer; color: inherit;
+}
+.nav-rollout-btns button.active { background: #555; color: #fff; border-color: #555; }
+</style>
+
+<div class="nav-oracle-row">
+
+  <!-- clutter-nav -->
+  <div class="nav-oracle-col">
+    <video id="vid-nav" autoplay loop muted playsinline controls></video>
+    <div class="nav-rollout-btns" id="btns-nav">
+      <span class="nav-rollout-label">Rollout:</span>
+      <button class="active" data-src="assets/clutter-nav/oracle/rollout-S1.mp4">1</button>
+      <button data-src="assets/clutter-nav/oracle/rollout-S108.mp4">2</button>
+      <button data-src="assets/clutter-nav/oracle/rollout-S181.mp4">3</button>
+      <button data-src="assets/clutter-nav/oracle/rollout-S48.mp4">4</button>
+      <button data-src="assets/clutter-nav/oracle/rollout-S74.mp4">5</button>
+    </div>
+  </div>
+
+</div>
+<br/>
+<script>
+(function () {
+  [['vid-nav','btns-nav'],].forEach(function(pair) {
+    var vid = document.getElementById(pair[0]);
+    var btns = document.getElementById(pair[1]);
+    if (!vid || !btns) return;
+    var cache = {};
+
+    function load(src, btn) {
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = true; });
+      if (cache[src]) {
+        setBlob(cache[src], btn);
+        return;
+      }
+      fetch(src)
+        .then(function(r) { return r.blob(); })
+        .then(function(blob) {
+          cache[src] = URL.createObjectURL(blob);
+          setBlob(cache[src], btn);
+        })
+        .catch(function() { btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; }); });
+    }
+
+    function setBlob(url, btn) {
+      if (vid._blobUrl && vid._blobUrl !== url) URL.revokeObjectURL(vid._blobUrl);
+      vid._blobUrl = url;
+      vid.src = url;
+      vid.load();
+      vid.play().catch(function(){});
+      btns.querySelectorAll('button').forEach(function(b) { b.disabled = false; });
+      if (btn) { btns.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); }
+    }
+
+    btns.querySelectorAll('button').forEach(function(btn) {
+      btn.addEventListener('click', function() { load(btn.dataset.src, btn); });
+    });
+    load(btns.querySelector('button.active').dataset.src, null);
+  });
+})();
+</script>
+```
+
+Rollouts of MPPI controller with maxed-out sensor and planner configurations. **Left:** the world scene view **Right:** corresponding ego-frame detections.
+
+:::
+
+

@@ -67,6 +67,200 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+(function () {
+  window.MathJax = window.MathJax || {};
+  window.MathJax.tex = window.MathJax.tex || {};
+  window.MathJax.tex.macros = Object.assign(window.MathJax.tex.macros || {}, {
+    // floor / ceil
+    ceil:  ['\\lceil #1 \\rceil', 1],
+    floor: ['\\lfloor #1 \\rfloor', 1],
+
+    // scalar shorthands
+    eps:  '{\\epsilon}',
+    reta: '{\\textnormal{\\eta}}',
+    ra: '{\\textnormal{a}}', rb: '{\\textnormal{b}}', rc: '{\\textnormal{c}}',
+    rd: '{\\textnormal{d}}', re: '{\\textnormal{e}}', rf: '{\\textnormal{f}}',
+    rg: '{\\textnormal{g}}', rh: '{\\textnormal{h}}', ri: '{\\textnormal{i}}',
+    rj: '{\\textnormal{j}}', rk: '{\\textnormal{k}}', rl: '{\\textnormal{l}}',
+    rn: '{\\textnormal{n}}', ro: '{\\textnormal{o}}', rp: '{\\textnormal{p}}',
+    rq: '{\\textnormal{q}}', rr: '{\\textnormal{r}}', rs: '{\\textnormal{s}}',
+    rt: '{\\textnormal{t}}', ru: '{\\textnormal{u}}', rv: '{\\textnormal{v}}',
+    rw: '{\\textnormal{w}}', rx: '{\\textnormal{x}}', ry: '{\\textnormal{y}}',
+    rz: '{\\textnormal{z}}',
+
+    // random vectors
+    rvepsilon: '{\\mathbf{\\epsilon}}', rvtheta: '{\\mathbf{\\theta}}',
+    rva: '{\\mathbf{a}}', rvb: '{\\mathbf{b}}', rvc: '{\\mathbf{c}}',
+    rvd: '{\\mathbf{d}}', rve: '{\\mathbf{e}}', rvf: '{\\mathbf{f}}',
+    rvg: '{\\mathbf{g}}', rvh: '{\\mathbf{h}}', rvj: '{\\mathbf{j}}',
+    rvk: '{\\mathbf{k}}', rvl: '{\\mathbf{l}}', rvm: '{\\mathbf{m}}',
+    rvn: '{\\mathbf{n}}', rvo: '{\\mathbf{o}}', rvp: '{\\mathbf{p}}',
+    rvq: '{\\mathbf{q}}', rvr: '{\\mathbf{r}}', rvs: '{\\mathbf{s}}',
+    rvt: '{\\mathbf{t}}', rvu: '{\\mathbf{u}}', rvv: '{\\mathbf{v}}',
+    rvw: '{\\mathbf{w}}', rvx: '{\\mathbf{x}}', rvy: '{\\mathbf{y}}',
+    rvz: '{\\mathbf{z}}',
+
+    // elements of random vectors
+    erva: '{\\textnormal{a}}', ervb: '{\\textnormal{b}}', ervc: '{\\textnormal{c}}',
+    ervd: '{\\textnormal{d}}', erve: '{\\textnormal{e}}', ervf: '{\\textnormal{f}}',
+    ervg: '{\\textnormal{g}}', ervh: '{\\textnormal{h}}', ervi: '{\\textnormal{i}}',
+    ervj: '{\\textnormal{j}}', ervk: '{\\textnormal{k}}', ervl: '{\\textnormal{l}}',
+    ervm: '{\\textnormal{m}}', ervn: '{\\textnormal{n}}', ervo: '{\\textnormal{o}}',
+    ervp: '{\\textnormal{p}}', ervq: '{\\textnormal{q}}', ervr: '{\\textnormal{r}}',
+    ervs: '{\\textnormal{s}}', ervt: '{\\textnormal{t}}', ervu: '{\\textnormal{u}}',
+    ervv: '{\\textnormal{v}}', ervw: '{\\textnormal{w}}', ervx: '{\\textnormal{x}}',
+    ervy: '{\\textnormal{y}}', ervz: '{\\textnormal{z}}',
+
+    // random matrices (bold)
+    rmA: '{\\mathbf{A}}', rmB: '{\\mathbf{B}}', rmC: '{\\mathbf{C}}',
+    rmD: '{\\mathbf{D}}', rmE: '{\\mathbf{E}}', rmF: '{\\mathbf{F}}',
+    rmG: '{\\mathbf{G}}', rmH: '{\\mathbf{H}}', rmI: '{\\mathbf{I}}',
+    rmK: '{\\mathbf{K}}', rmL: '{\\mathbf{L}}', rmM: '{\\mathbf{M}}',
+    rmN: '{\\mathbf{N}}', rmO: '{\\mathbf{O}}', rmP: '{\\mathbf{P}}',
+    rmQ: '{\\mathbf{Q}}', rmS: '{\\mathbf{S}}', rmT: '{\\mathbf{T}}',
+    rmU: '{\\mathbf{U}}', rmV: '{\\mathbf{V}}', rmW: '{\\mathbf{W}}',
+    rmX: '{\\mathbf{X}}', rmY: '{\\mathbf{Y}}', rmZ: '{\\mathbf{Z}}',
+
+    // elements of random matrices
+    ermA: '{\\textnormal{A}}', ermB: '{\\textnormal{B}}', ermC: '{\\textnormal{C}}',
+    ermD: '{\\textnormal{D}}', ermE: '{\\textnormal{E}}', ermF: '{\\textnormal{F}}',
+    ermG: '{\\textnormal{G}}', ermH: '{\\textnormal{H}}', ermI: '{\\textnormal{I}}',
+    ermJ: '{\\textnormal{J}}', ermK: '{\\textnormal{K}}', ermL: '{\\textnormal{L}}',
+    ermM: '{\\textnormal{M}}', ermN: '{\\textnormal{N}}', ermO: '{\\textnormal{O}}',
+    ermP: '{\\textnormal{P}}', ermQ: '{\\textnormal{Q}}', ermR: '{\\textnormal{R}}',
+    ermS: '{\\textnormal{S}}', ermT: '{\\textnormal{T}}', ermU: '{\\textnormal{U}}',
+    ermV: '{\\textnormal{V}}', ermW: '{\\textnormal{W}}', ermX: '{\\textnormal{X}}',
+    ermY: '{\\textnormal{Y}}', ermZ: '{\\textnormal{Z}}',
+
+    // vectors (bold)
+    vzero: '{\\mathbf{0}}', vone: '{\\mathbf{1}}',
+    vmu: '{\\boldsymbol{\\mu}}', vtheta: '{\\boldsymbol{\\theta}}',
+    va: '{\\mathbf{a}}', vb: '{\\mathbf{b}}', vc: '{\\mathbf{c}}',
+    vd: '{\\mathbf{d}}', ve: '{\\mathbf{e}}', vf: '{\\mathbf{f}}',
+    vg: '{\\mathbf{g}}', vh: '{\\mathbf{h}}', vi: '{\\mathbf{i}}',
+    vj: '{\\mathbf{j}}', vk: '{\\mathbf{k}}', vl: '{\\mathbf{l}}',
+    vm: '{\\mathbf{m}}', vn: '{\\mathbf{n}}', vo: '{\\mathbf{o}}',
+    vp: '{\\mathbf{p}}', vq: '{\\mathbf{q}}', vr: '{\\mathbf{r}}',
+    vs: '{\\mathbf{s}}', vt: '{\\mathbf{t}}', vu: '{\\mathbf{u}}',
+    vv: '{\\mathbf{v}}', vw: '{\\mathbf{w}}', vx: '{\\mathbf{x}}',
+    vy: '{\\mathbf{y}}', vz: '{\\mathbf{z}}',
+
+    // elements of vectors
+    evalpha: '{\\alpha}',   evbeta: '{\\beta}',    evepsilon: '{\\epsilon}',
+    evlambda: '{\\lambda}', evomega: '{\\omega}',  evmu: '{\\mu}',
+    evpsi: '{\\psi}',       evsigma: '{\\sigma}',  evtheta: '{\\theta}',
+    eva: '{a}', evb: '{b}', evc: '{c}', evd: '{d}', eve: '{e}',
+    evf: '{f}', evg: '{g}', evh: '{h}', evi: '{i}', evj: '{j}',
+    evk: '{k}', evl: '{l}', evm: '{m}', evn: '{n}', evo: '{o}',
+    evp: '{p}', evq: '{q}', evr: '{r}', evs: '{s}', evt: '{t}',
+    evu: '{u}', evv: '{v}', evw: '{w}', evx: '{x}', evy: '{y}',
+    evz: '{z}',
+
+    // matrices
+    mA: '{\\mathbf{A}}', mB: '{\\mathbf{B}}', mC: '{\\mathbf{C}}',
+    mD: '{\\mathbf{D}}', mE: '{\\mathbf{E}}', mF: '{\\mathbf{F}}',
+    mG: '{\\mathbf{G}}', mH: '{\\mathbf{H}}', mI: '{\\mathbf{I}}',
+    mJ: '{\\mathbf{J}}', mK: '{\\mathbf{K}}', mL: '{\\mathbf{L}}',
+    mM: '{\\mathbf{M}}', mN: '{\\mathbf{N}}', mO: '{\\mathbf{O}}',
+    mP: '{\\mathbf{P}}', mQ: '{\\mathbf{Q}}', mR: '{\\mathbf{R}}',
+    mS: '{\\mathbf{S}}', mT: '{\\mathbf{T}}', mU: '{\\mathbf{U}}',
+    mV: '{\\mathbf{V}}', mW: '{\\mathbf{W}}', mX: '{\\mathbf{X}}',
+    mY: '{\\mathbf{Y}}', mZ: '{\\mathbf{Z}}',
+    mBeta: '{\\boldsymbol{\\beta}}', mPhi: '{\\boldsymbol{\\Phi}}',
+    mLambda: '{\\boldsymbol{\\Lambda}}', mSigma: '{\\boldsymbol{\\Sigma}}',
+
+    // tensors (mathsfit not available in MathJax; fall back to mathbf)
+    tens:  ['\\mathbf{#1}', 1],
+    etens: ['\\mathit{#1}', 1],
+    tA: '{\\mathbf{A}}', tB: '{\\mathbf{B}}', tC: '{\\mathbf{C}}',
+    tD: '{\\mathbf{D}}', tE: '{\\mathbf{E}}', tF: '{\\mathbf{F}}',
+    tG: '{\\mathbf{G}}', tH: '{\\mathbf{H}}', tI: '{\\mathbf{I}}',
+    tJ: '{\\mathbf{J}}', tK: '{\\mathbf{K}}', tL: '{\\mathbf{L}}',
+    tM: '{\\mathbf{M}}', tN: '{\\mathbf{N}}', tO: '{\\mathbf{O}}',
+    tP: '{\\mathbf{P}}', tQ: '{\\mathbf{Q}}', tR: '{\\mathbf{R}}',
+    tS: '{\\mathbf{S}}', tT: '{\\mathbf{T}}', tU: '{\\mathbf{U}}',
+    tV: '{\\mathbf{V}}', tW: '{\\mathbf{W}}', tX: '{\\mathbf{X}}',
+    tY: '{\\mathbf{Y}}', tZ: '{\\mathbf{Z}}',
+
+    // graphs / sets
+    gA: '{\\mathcal{A}}', gB: '{\\mathcal{B}}', gC: '{\\mathcal{C}}',
+    gD: '{\\mathcal{D}}', gE: '{\\mathcal{E}}', gF: '{\\mathcal{F}}',
+    gG: '{\\mathcal{G}}', gH: '{\\mathcal{H}}', gI: '{\\mathcal{I}}',
+    gJ: '{\\mathcal{J}}', gK: '{\\mathcal{K}}', gL: '{\\mathcal{L}}',
+    gM: '{\\mathcal{M}}', gN: '{\\mathcal{N}}', gO: '{\\mathcal{O}}',
+    gP: '{\\mathcal{P}}', gQ: '{\\mathcal{Q}}', gR: '{\\mathcal{R}}',
+    gS: '{\\mathcal{S}}', gT: '{\\mathcal{T}}', gU: '{\\mathcal{U}}',
+    gV: '{\\mathcal{V}}', gW: '{\\mathcal{W}}', gX: '{\\mathcal{X}}',
+    gY: '{\\mathcal{Y}}', gZ: '{\\mathcal{Z}}',
+
+    sA: '{\\mathbb{A}}', sB: '{\\mathbb{B}}', sC: '{\\mathbb{C}}',
+    sD: '{\\mathbb{D}}', sF: '{\\mathbb{F}}', sG: '{\\mathbb{G}}',
+    sH: '{\\mathbb{H}}', sI: '{\\mathbb{I}}', sJ: '{\\mathbb{J}}',
+    sK: '{\\mathbb{K}}', sL: '{\\mathbb{L}}', sM: '{\\mathbb{M}}',
+    sN: '{\\mathbb{N}}', sO: '{\\mathbb{O}}', sP: '{\\mathbb{P}}',
+    sQ: '{\\mathbb{Q}}', sR: '{\\mathbb{R}}', sS: '{\\mathbb{S}}',
+    sT: '{\\mathbb{T}}', sU: '{\\mathbb{U}}', sV: '{\\mathbb{V}}',
+    sW: '{\\mathbb{W}}', sX: '{\\mathbb{X}}', sY: '{\\mathbb{Y}}',
+    sZ: '{\\mathbb{Z}}',
+
+    // matrix entries
+    emLambda: '{\\Lambda}', emSigma: '{\\Sigma}',
+    emA: '{A}', emB: '{B}', emC: '{C}', emD: '{D}', emE: '{E}',
+    emF: '{F}', emG: '{G}', emH: '{H}', emI: '{I}', emJ: '{J}',
+    emK: '{K}', emL: '{L}', emM: '{M}', emN: '{N}', emO: '{O}',
+    emP: '{P}', emQ: '{Q}', emR: '{R}', emS: '{S}', emT: '{T}',
+    emU: '{U}', emV: '{V}', emW: '{W}', emX: '{X}', emY: '{Y}',
+    emZ: '{Z}',
+
+    // tensor entries
+    etLambda: '{\\mathit{\\Lambda}}',
+    etA: '{\\mathit{A}}', etB: '{\\mathit{B}}', etC: '{\\mathit{C}}',
+    etD: '{\\mathit{D}}', etE: '{\\mathit{E}}', etF: '{\\mathit{F}}',
+    etG: '{\\mathit{G}}', etH: '{\\mathit{H}}', etI: '{\\mathit{I}}',
+    etJ: '{\\mathit{J}}', etK: '{\\mathit{K}}', etL: '{\\mathit{L}}',
+    etM: '{\\mathit{M}}', etN: '{\\mathit{N}}', etO: '{\\mathit{O}}',
+    etP: '{\\mathit{P}}', etQ: '{\\mathit{Q}}', etR: '{\\mathit{R}}',
+    etS: '{\\mathit{S}}', etT: '{\\mathit{T}}', etU: '{\\mathit{U}}',
+    etV: '{\\mathit{V}}', etW: '{\\mathit{W}}', etX: '{\\mathit{X}}',
+    etY: '{\\mathit{Y}}', etZ: '{\\mathit{Z}}',
+
+    // standard operators and shorthands
+    laplace:       '\\mathrm{Laplace}',
+    E:             '\\mathbb{E}',
+    Ls:            '\\mathcal{L}',
+    R:             '\\mathbb{R}',
+    emp:           '\\tilde{p}',
+    lr:            '\\alpha',
+    reg:           '\\lambda',
+    rect:          '\\mathrm{rectifier}',
+    softmax:       '\\mathrm{softmax}',
+    sigmoid:       '\\sigma',
+    softplus:      '\\zeta',
+    KL:            'D_{\\mathrm{KL}}',
+    TV:            '\\delta_{\\mathrm{TV}}',
+    Var:           '\\mathrm{Var}',
+    standarderror: '\\mathrm{SE}',
+    Cov:           '\\mathrm{Cov}',
+    normlzero:     'L^0',
+    normlone:      'L^1',
+    normltwo:      'L^2',
+    normlp:        'L^p',
+    normmax:       'L^{\\infty}',
+    parents:       '\\mathrm{Pa}',
+    argmax:        '\\operatorname*{arg\\,max}',
+    argmin:        '\\operatorname*{arg\\,min}',
+    sign:          '\\operatorname{sign}',
+    Tr:            '\\operatorname{Tr}',
+    ab:            '\\allowbreak',
+    Ind:           ['\\mathbb{1}_{\\left[#1\\right]}', 1],
+
+    // custom overrides (rmR / rmJ as roman, not bold)
+    rmR: '\\mathrm{R}',
+    rmJ: '\\mathrm{J}',
+  });
+})();
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -96,10 +290,6 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="./designs.html"> 
 <span class="menu-text">Best Designs</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dashboard-PR.html"> 
-<span class="menu-text">PR-Dashboard</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -159,21 +349,20 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="supplementary-material" class="level2">
 <h2 class="anchored" data-anchor-id="supplementary-material">Supplementary Material</h2>
-<p>The supplementary material is organized as follows:</p>
+<p>The supplementary material is organized as follows, please click on the links below to navigate to the corresponding sections:</p>
 <ul>
-<li><a href="./tasks/overview.html"><strong>Task Description</strong></a> <br><em>Provides an overview of the following tasks LEMCA is evaluated on.</em>
+<li><a href="./tasks/overview.html"><strong>Task Description</strong></a> <br><em>Provides an overview of the following tasks LEMCA is evaluated on. The details of the task dynamics, sensor library, and associated costs are provided. See more at <a href="./tasks/overview.html">link</a>.</em>
 <ul>
-<li><code>point-to-disk</code></li>
-<li><code>RF-DMC</code>
+<li><a href="./tasks/overview.html#point-to-disk"><code>point-to-disk</code></a></li>
+<li><a href="./tasks/overview.html#rf-dmc"><code>RF-DMC</code></a>
 <ul>
 <li><code>cartpole-swingup</code></li>
 <li><code>cup-catch</code></li>
 <li><code>finger-spin</code></li>
 </ul></li>
-<li><code>clutter-nav</code></li>
+<li><a href="./tasks/overview.html#clutter-nav"><code>clutter-nav</code></a></li>
 </ul></li>
-<li><a href="./designs.html"><strong>Best Designs</strong></a> <br><em>Outlines the best designs synthesized by LEMCA for each task.</em></li>
-<li><a href="./dashboard-PR.html"><strong>Performance-Resource Dashboard</strong></a> <br><em>An interactive dashboard visualizing LEMCA’s design process on the performance-resource plane.</em></li>
+<li><a href="./designs.html"><strong>Best Designs</strong></a> <br><em>This presents an interactive dashboard to via the best mode-switching controller designs synthesized by LEMCA for each task + performance target. The dashboard outlines the source code of the best design along with its performance metrics and rollouts. View the dashboard at <a href="./designs.html">link</a>.</em></li>
 </ul>
 
 
