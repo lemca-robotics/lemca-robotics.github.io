@@ -1,5 +1,16 @@
 ---
 title: "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures"
+subtitle: "Conference on Robot Learning (CoRL) 2026<img src='assets/corl.png' alt='CoRL-logo' style='height: 1.2em; margin-left: 1.2em;'>"
+author:
+    - name: Arjun Krishna
+      url: https://arjun-krishna.github.io/
+      affiliation: "<img src='assets/upenn.png' alt='UPenn-logo' style='height: 1.5em; margin-left: 0.3em; margin-right: 0.3em'> University of Pennsylvania "
+    - name: Vincent Pacelli
+      url: https://pacel.li/
+      affiliation: "<img src='assets/amazon-robotics.svg' alt='Amazon-logo' style='height: 1.5em; margin-left: 0.3em; margin-right: 0.3em'> Amazon Robotics"
+    - name: Dinesh Jayaraman
+      url: https://www.engineering.upenn.edu/~dineshj/
+      affiliation: "<img src='assets/upenn.png' alt='UPenn-logo' style='height: 1.5em; margin-left: 0.3em; margin-right: 0.3em'> University of Pennsylvania"
 ---
 
 ## Abstract
@@ -7,9 +18,9 @@ title: "LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architec
 Physical control tasks in the natural world, such as driving or object manipulation, frequently exhibit dramatic variations in sensory and compute complexity over time. Correspondingly, a natural resource-efficient choice for robot control is to dynamically switch between control modes with varying resource allocations. However, such “mode-switching controllers” (MSCs) have historically required laborious, expert-driven design and synthesis for each new task. Driven by these design difficulties, modern robotic control architectures often fall back to a wasteful “monolithic” one-size-fits-all structure, where resource allocation is permanently anchored to the hardest, most resource-intensive task phases. To facilitate the design of performant yet efficient MSCs, we propose LLM-Guided synthesis of Efficient Mode-Switching Control Architectures (LEMCA). LEMCA represents MSC designs as interpretable programs to be iteratively refined in an evolutionary loop. To evaluate design fitness, we propose MSC-compatible extensions of automated controller synthesis approaches, such as reinforcement learning in simulation. LEMCA then leverages the semantic priors, reasoning, and coding capabilities of Large Language Models (LLMs) to iteratively edit controller modes, their corresponding sensory-compute resource allocations, and mode transitions. Our experiments across diverse control benchmarks show that LEMCA consistently discovers strategies that surpass the Pareto frontier of monolithic designs by reclaiming wasted resources during “easy” task phases. LEMCA thus presents an automated, low-effort path to synthesize resource-efficient MSC designs.
 :::
 ### Links
-<a href="assets/full_paper_with_appendix.pdf" class="btn btn-primary" role="button">Paper</a>
-<a href="/" class="btn btn-primary disabled" role="button">OpenReview</a>
-<a href="/" class="btn btn-primary disabled" role="button">Code</a>
+<a href="https://arxiv.org/abs/2609.21319" class="btn btn-primary" role="button"><img src="assets/arxiv-logomark-small.svg" alt="arXiv-logo" style="height: 1.5em; margin-right: 0.5em"><b>arXiv</b></a>
+<a href="https://openreview.net/forum?id=802PZFmFGd" class="btn btn-primary disabled" role="button"><img src="assets/openreview.png" alt="OpenReview logo" style="height: 1.5em; margin-right: 0.5em"><b>OpenReview</b></a>
+<a href="/" class="btn btn-primary disabled" role="button"><i class="bi bi-github" aria-hidden="true" style="font-size: 1em; margin-right: 0.5em;"></i><b>Code</b></a>
 
 ## Supplementary Material
 The supplementary material is organized as follows, please click on the links below to navigate to the corresponding sections:
@@ -24,3 +35,26 @@ The supplementary material is organized as follows, please click on the links be
   + [`clutter-nav`](tasks/overview.qmd#clutter-nav)
 - [**Best Designs**](designs.qmd)
   <br/>_This presents an interactive dashboard to via the best mode-switching controller designs synthesized by LEMCA for each task + performance target. The dashboard outlines the source code of the best design along with its performance metrics and rollouts. View the dashboard at [link](designs.qmd)._
+
+
+### Citation
+
+BibTeX citation:
+```bibtex
+@inproceedings{krishna2026lemca,
+  title        = {LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures},
+  author       = {Krishna, Arjun and Pacelli, Vincent and Jayaraman, Dinesh},
+  booktitle    = {Conference on Robot Learning (CoRL)},
+  year         = {2026},
+  note         = {To appear},
+  eprint       = {2609.21319},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  url          = {https://arxiv.org/abs/2609.21319}
+}
+```
+
+For attribution, please cite this work as:
+```txt
+Arjun Krishna, Vincent Pacelli, and Dinesh Jayaraman. “LEMCA: LLM-Guided Synthesis of Efficient Mode-Switching Control Architectures.” In Conference on Robot Learning (CoRL), 2026.
+```

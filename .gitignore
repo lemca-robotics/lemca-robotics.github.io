@@ -1,3 +1,5 @@
 /.quarto/
 tasks/assets
 designs/*/
+
+**/*.quarto_ipynb
